@@ -123,12 +123,13 @@ nav li:hover {
 	margin-bottom: 0.5em;
 }
 
-#filtres ul {
+#filtres {
 	display: flex;
 	justify-content: center;
+	margin-bottom: 3em;
 }
 
-#filtres li{
+#filtres button{
 		display: flex;
 		border-radius: 30px;
 		margin: 8px;
@@ -139,9 +140,10 @@ nav li:hover {
 		justify-content: center;
 		font-family: 'Syne';
 		font-size: 16px;
+		background-color: #FFFEF8;
 }
 
-#filtres li:hover {
+#filtres button:hover {
 	color: white;
 	background-color: #1D6154;
 }

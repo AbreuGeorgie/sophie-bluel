@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #FFFEF8;
 }
 ol, ul {
 	list-style: none;
@@ -95,7 +96,7 @@ nav li {
 	font-size: 1.2em;
 }
 
-li:hover {
+nav li:hover {
 	color: #B1663C;
 }
 #introduction {
@@ -121,9 +122,34 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
+#filtres ul {
+	display: flex;
+	justify-content: center;
+}
+
+#filtres li{
+		display: flex;
+		border-radius: 30px;
+		margin: 8px;
+		padding: 10px;
+		color: #1D6154;
+		border : 1px solid #1D6154;
+		min-width: 5em;
+		justify-content: center;
+		font-family: 'Syne';
+		font-size: 16px;
+}
+
+#filtres li:hover {
+	color: white;
+	background-color: #1D6154;
+}
+
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 2em;
+	margin-top: 4em;
 }
 .gallery {
 	width: 100%;

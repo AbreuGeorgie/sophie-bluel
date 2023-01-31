@@ -1,4 +1,4 @@
-async function projetArchitect() {
+async function callApiWorks() {
 	const response = await fetch('http://localhost:5678/api/works');
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
@@ -31,10 +31,34 @@ function genererFigure(work) {
     projetElement.appendChild(imageElement);
     projetElement.appendChild(nomElement);
 };
-    
 
-projetArchitect().then((works) => {
+const filtres=new Set(["Tout", "Objets", "Appartements", "Hôtels et restaurant"]);
+for (value of filtres) {
+  console.log(value);
+}
+    
+/* const boutonFiltrer = document.querySelector(".btn-filtrer");
+
+    boutonFiltrer.addEventListener("click", function(){
+        const piecesFiltrees = pieces.filtre (function (piece) {
+            return piece.prix <= 35;
+        })
+
+        console.log(piecesFiltrees);
+    })
+
+    const boutonFiltrerDescription = document.querySelector(".btn-filterDescription")
+
+    boutonFiltrerDescription.addEventListener("click", function() {
+        const descriptionFiltrees = description.filtre((descriptions) => {
+            return descriptions
+        })
+    }) */
+
+callApiWorks().then((works) => {
     works.forEach((work, i) => {
         genererFigure(work);
     });
+    const categorie = work.map(work => work.categorie);
 });
+

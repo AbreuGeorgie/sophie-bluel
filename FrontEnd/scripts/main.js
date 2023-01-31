@@ -12,7 +12,7 @@ function genererFigure(work) {
 
     //recuperation de l'element du dom qui accueillera les figures
     const gallery = document.querySelector(".gallery");
-    console.log("gallery", gallery)
+    // console.log("gallery", gallery)
     //creation d'une balise dediee a un projet
     const projetElement = document.createElement("work");
 
@@ -32,33 +32,38 @@ function genererFigure(work) {
     projetElement.appendChild(nomElement);
 };
 
-const filtres=new Set(["Tout", "Objets", "Appartements", "Hôtels et restaurant"]);
-for (value of filtres) {
-  console.log(value);
-}
+function genererFiltre(conteneurFiltres, categoryName, works) {
+
+    //boutons filtres
+    const boutonFiltre = document.createElement("button");
+    boutonFiltre.id = `btn-${categoryName}`.toLowerCase();
+    boutonFiltre.innerText = categoryName;
     
-/* const boutonFiltrer = document.querySelector(".btn-filtrer");
+/*     const boutonFiltreObjet = document.getElementById("btn-objets") ;
+    boutonFiltreObjet.addEventListener ("click", function() {
+       const objetsFiltres = works.filter(function (works) {
+                return works === 'objets'
+                })
+            })
 
-    boutonFiltrer.addEventListener("click", function(){
-        const piecesFiltrees = pieces.filtre (function (piece) {
-            return piece.prix <= 35;
-        })
+    
+ */
 
-        console.log(piecesFiltrees);
-    })
-
-    const boutonFiltrerDescription = document.querySelector(".btn-filterDescription")
-
-    boutonFiltrerDescription.addEventListener("click", function() {
-        const descriptionFiltrees = description.filtre((descriptions) => {
-            return descriptions
-        })
-    }) */
+    conteneurFiltres.appendChild(boutonFiltre);
+}
 
 callApiWorks().then((works) => {
-    works.forEach((work, i) => {
+    const filtres = new Set(["Tout"]);
+    const divFilterbloque = document.querySelector("#filtres");
+
+    works.forEach((work) => {
+        filtres.add(work.category.name);
         genererFigure(work);
     });
-    const categorie = work.map(work => work.categorie);
-});
+    console.log("categorie", filtres); 
+    console.log("divFilterbloque", divFilterbloque)
 
+    filtres.forEach(categoryName => {
+        genererFiltre(divFilterbloque, categoryName, works)
+    });
+})

@@ -10,60 +10,61 @@ async function callApiWorks() {
 
 function genererFigure(work) {
 
-    //recuperation de l'element du dom qui accueillera les figures
-    const gallery = document.querySelector(".gallery");
-    // console.log("gallery", gallery)
-    //creation d'une balise dediee a un projet
-    const projetElement = document.createElement("work");
+    
+    const gallerie = document.querySelector(".gallery");
+    const projetsArchitecte = document.createElement("work");
 
-    //création des balises
-    const imageElement = document.createElement("img");
-    imageElement.crossOrigin = "anonymous";
-    imageElement.src = work.imageUrl;
-    imageElement.alt = work.title;
-    const nomElement = document.createElement("figcaption");
-    nomElement.innerText = work.title;
+    //création des images et nom des projets
+    const imageProjet = document.createElement("img");
+    imageProjet.crossOrigin = "anonymous";
+    imageProjet.src = work.imageUrl;
+    imageProjet.alt = work.title;
+    const nomProjet = document.createElement("figcaption");
+    nomProjet.innerText = work.title;
 
-    // on rattache la balise figure à la section gallery
-    gallery.appendChild(projetElement);
+    // on rattache les projets de l'architecte à la gallerie
+    gallerie.appendChild(projetsArchitecte);
 
-    //ratachement de l'image a projetElement (la balise work)
-    projetElement.appendChild(imageElement);
-    projetElement.appendChild(nomElement);
+    //ratachement des images et noms des projets aux projets de l'architecte
+    projetsArchitecte.appendChild(imageProjet);
+    projetsArchitecte.appendChild(nomProjet);
 };
 
-function genererFiltre(conteneurFiltres, categoryName, works) {
+function genererFiltre(conteneurFiltres, nomCategorie, figures) {
 
-    //boutons filtres
+    /* const conteneurFiltres = document.querySelector('#filtres'); */
+    const projetsArchitecte = document.createElement("work");
+
     const boutonFiltre = document.createElement("button");
-    boutonFiltre.id = `btn-${categoryName}`.toLowerCase();
-    boutonFiltre.innerText = categoryName;
-    
-/*     const boutonFiltreObjet = document.getElementById("btn-objets") ;
-    boutonFiltreObjet.addEventListener ("click", function() {
-       const objetsFiltres = works.filter(function (works) {
-                return works === 'objets'
-                })
-            })
+    boutonFiltre.innerText = nomCategorie;
 
-    
- */
+    conteneurFiltres.appendChild(projetsArchitecte);
+    projetsArchitecte.appendChild(boutonFiltre);
+};
 
-    conteneurFiltres.appendChild(boutonFiltre);
-}
+callApiWorks().then((figures, filtres) => {
+    const nomfiltres = new Set([]);      //qu'est ce que je dois mettre entre crochet???
+    const conteneurFiltres = document.querySelector("#filtres");
 
-callApiWorks().then((works) => {
-    const filtres = new Set(["Tout"]);
-    const divFilterbloque = document.querySelector("#filtres");
-
-    works.forEach((work) => {
-        filtres.add(work.category.name);
+    figures.forEach((work) => {
+        nomfiltres.add(work.category.name);
         genererFigure(work);
     });
-    console.log("categorie", filtres); 
-    console.log("divFilterbloque", divFilterbloque)
+    console.log("categorie", nomfiltres); 
+    console.log("conteneurfiltres", conteneurFiltres);
 
-    filtres.forEach(categoryName => {
-        genererFiltre(divFilterbloque, categoryName, works)
+    filtres.forEach((nomCategorie) => {    //Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'forEach') je ne comprends pas 
+        genererFiltre(conteneurFiltres, nomCategorie, figures)
+    });
+
+    boutonFiltre.addEventListener("click", function () {
+        const projetsFiltrees = nomfiltres.filter(function (nomfiltres) {
+            return nomfiltres.nomCategorie;
+        });
+       console.log(projetsFiltrees);
     });
 })
+
+
+
+

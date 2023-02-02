@@ -30,13 +30,15 @@ function genererFigure(work) {
     projetsArchitecte.appendChild(nomProjet);
 };
 
-function genererFiltre(conteneurFiltres, nomCategorie, figures) {
+function genererFiltre(conteneurFiltres, nomCategorie, figures) {  // pourquoi pleins de parametre alors que genererfigure seulement work
 
-    /* const conteneurFiltres = document.querySelector('#filtres'); */
     const projetsArchitecte = document.createElement("work");
+    /* const conteneurFiltres = document.querySelector("#filtres"); */ // pourquoi quand je le met ici ça supprime la gallerie?
 
     const boutonFiltre = document.createElement("button");
     boutonFiltre.innerText = nomCategorie;
+    boutonFiltre.crossOrigin = "anonymous"; // test
+    
 
     conteneurFiltres.appendChild(projetsArchitecte);
     projetsArchitecte.appendChild(boutonFiltre);
@@ -44,7 +46,7 @@ function genererFiltre(conteneurFiltres, nomCategorie, figures) {
 
 callApiWorks().then((figures, filtres) => {
     const nomfiltres = new Set([]);      //qu'est ce que je dois mettre entre crochet???
-    const conteneurFiltres = document.querySelector("#filtres");
+    
 
     figures.forEach((work) => {
         nomfiltres.add(work.category.name);

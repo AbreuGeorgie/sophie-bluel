@@ -10,9 +10,8 @@ async function callApiWorks() {
 
 function genererFigure(work) {
 
-    
+    const projetArchitecte = document.createElement("figure");
     const gallerie = document.querySelector(".gallery");
-    const projetsArchitecte = document.createElement("work");
 
     //création des images et nom des projets
     const imageProjet = document.createElement("img");
@@ -23,49 +22,46 @@ function genererFigure(work) {
     nomProjet.innerText = work.title;
 
     // on rattache les projets de l'architecte à la gallerie
-    gallerie.appendChild(projetsArchitecte);
+    gallerie.appendChild(projetArchitecte);
 
     //ratachement des images et noms des projets aux projets de l'architecte
-    projetsArchitecte.appendChild(imageProjet);
-    projetsArchitecte.appendChild(nomProjet);
+    projetArchitecte.appendChild(imageProjet);
+    projetArchitecte.appendChild(nomProjet);
 };
 
-function genererFiltre(conteneurFiltres, nomCategorie, figures) {  // pourquoi pleins de parametre alors que genererfigure seulement work
 
-    const projetsArchitecte = document.createElement("work");
-    /* const conteneurFiltres = document.querySelector("#filtres"); */ // pourquoi quand je le met ici ça supprime la gallerie?
-
-    const boutonFiltre = document.createElement("button");
-    boutonFiltre.innerText = nomCategorie;
-    boutonFiltre.crossOrigin = "anonymous"; // test
+callApiWorks().then((figures) => {
+    const filtres = new Set(["Tout"]);      
     
+    figures.forEach((figure) => {
+        filtres.add(figure.category.name);
+        genererFigure(figure);
+    });
+    console.log("categorie", filtres); 
 
-    conteneurFiltres.appendChild(projetsArchitecte);
-    projetsArchitecte.appendChild(boutonFiltre);
-};
-
-callApiWorks().then((figures, filtres) => {
-    const nomfiltres = new Set([]);      //qu'est ce que je dois mettre entre crochet???
     
+    filtres.forEach((filtre) => { 
+        const boutonFiltre = document.createElement("button");
+        const conteneurFiltres = document.querySelector("#filtres"); // a mettre dans une fonction car sinon est répété 4 fois
 
-    figures.forEach((work) => {
-        nomfiltres.add(work.category.name);
-        genererFigure(work);
-    });
-    console.log("categorie", nomfiltres); 
-    console.log("conteneurfiltres", conteneurFiltres);
+        boutonFiltre.innerText = filtre; 
+        conteneurFiltres.appendChild(boutonFiltre);
 
-    filtres.forEach((nomCategorie) => {    //Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'forEach') je ne comprends pas 
-        genererFiltre(conteneurFiltres, nomCategorie, figures)
-    });
+        console.log("conteneurfiltres", conteneurFiltres);
 
-    boutonFiltre.addEventListener("click", function () {
-        const projetsFiltrees = nomfiltres.filter(function (nomfiltres) {
-            return nomfiltres.nomCategorie;
+        boutonFiltre.addEventListener("click", function () {
+            const projetsFiltrees = filtres.filter(function (filt) { //filtres (mon "tableau set").filter n'est pas une focntion
+                return filt.filtres == filtre;
+            });
+        
+            });
         });
-       console.log(projetsFiltrees);
     });
-})
+
+
+
+
+
 
 
 

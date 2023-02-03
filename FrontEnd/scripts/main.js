@@ -32,20 +32,30 @@ function genererFigure(work) {
 console.log("a");
 
 callApiWorks().then((figures) => {
-    const filtres = new Set(["Tout"]); 
+    const filtres = new Set([]); 
 
     figures.forEach((figure) => {
         filtres.add(figure.category.name);
         genererFigure(figure);
     });
 
+    const conteneurFiltres = document.querySelector("#filtres");
+
+    const boutonTout = document.createElement("button");
+    boutonTout.innerText = "Tout";
+    conteneurFiltres.appendChild(boutonTout);
+
+    boutonTout.addEventListener("click", () => {
+        document.querySelector(".gallery").innerHTML = "";
+        figures.forEach(genererFigure);
+    });
+
     filtres.forEach((filtre) => { 
         const boutonFiltre = document.createElement("button");
-        const conteneurFiltres = document.querySelector("#filtres");
 
         boutonFiltre.innerText = filtre; 
-        conteneurFiltres.appendChild(boutonFiltre);
 
+        conteneurFiltres.appendChild(boutonFiltre);
 
         boutonFiltre.addEventListener("click", () => {
             const projetsFiltrees = figures.filter((figure) => {
@@ -53,11 +63,14 @@ callApiWorks().then((figures) => {
             });
             document.querySelector(".gallery").innerHTML = "";
             console.log("z", figures)
-            projetsFiltrees.forEach((figure) => {
-                genererFigure(figure);
+            projetsFiltrees.forEach(genererFigure);
             });
         });
-    });
+        
+        boutonTout.addEventListener("click", () => {
+            document.querySelector(".gallery").innerHTML = "";
+            figures.forEach(genererFigure);
+        });
 });
 console.log("b")
 

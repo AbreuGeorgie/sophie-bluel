@@ -29,10 +29,14 @@ function genererFigure(work) {
     projetArchitecte.appendChild(nomProjet);
 };
 
+console.log("a");
 
 callApiWorks().then((figures) => {
-    const filtres = new Set(["Tout"]);      
-    
+    console.log("c", figures);
+    const filtres = new Set(["Tout"]); 
+
+    console.log("d", filtres);
+
     figures.forEach((figure) => {
         filtres.add(figure.category.name);
         genererFigure(figure);
@@ -50,13 +54,16 @@ callApiWorks().then((figures) => {
         console.log("conteneurfiltres", conteneurFiltres);
 
         boutonFiltre.addEventListener("click", function () {
-            const projetsFiltrees = filtres.filter(function (filt) { //filtres (mon "tableau set").filter n'est pas une focntion
-                return filt.filtres == filtre;
+            console.log("e", filtre)
+            const projetsFiltrees = Array.from(figures).filter(function (figure) {
+                console.log("g", figure.category.name == filtre);
+                    return figure.category.name == filtre;
             });
-        
-            });
+        console.log("f", projetsFiltrees)
         });
     });
+});
+console.log("b")
 
 
 

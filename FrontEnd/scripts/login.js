@@ -3,6 +3,7 @@ async function callApilogin(user) {
   let response = await fetch('http://localhost:5678/api/users/login', {
     method: 'POST',
     headers: {
+      'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(user)
@@ -23,20 +24,16 @@ formulaire.addEventListener("submit", function (event) {
     password: event.target.querySelector("#pass").value
   };
   console.log("user", user)
-  callApilogin(user).then((res)=>{
-    document.location.href="./index.html";
-  })
+
+    callApilogin(user).then((res)=>{
+    document.location.href="./index.html"
+    }).catch((error) => {
+      alert("Erreur de saisie")
+      console.error(error);
+    });
   
-    .catch();
-
-  //formulaire.submit();
-
 
 });
-  
-      /* window.addEventListener("load", (event) => {
-        console.log("page is fully loaded");
-      }); */
   
    
   //{"userId":1,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY3NTUxNzE1OSwiZXhwIjoxNjc1NjAzNTU5fQ.WBBRIWsV4-cp3wY84-k83ZJ6escehX3cmrPRu1xVzXU"}

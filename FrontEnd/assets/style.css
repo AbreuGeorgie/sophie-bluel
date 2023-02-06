@@ -106,7 +106,7 @@ nav a {
 	text-decoration: none;
 }
 
-nav li:hover, nav a:hover {
+nav > ul > li > a:hover {
 	color: #B1663C;
 }
 

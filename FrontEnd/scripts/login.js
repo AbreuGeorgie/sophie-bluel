@@ -8,32 +8,37 @@ async function callApilogin(user) {
     },
     body: JSON.stringify(user)
   });
-  
+  if (!response.ok) {
+		throw new Error(`HTTP error! status: ${response.status}`);
+	}
   let result = await response.json();
-  // alert(result.message);
   console.log("a", result)
   return result
 };
-  
+
+
 const formulaire = document.querySelector(".form-login");
 
 formulaire.addEventListener("submit", function (event) {
+  for (let input of document.querySelectorAll(".form input")) {
+    input.reportValidity();
+  }
   event.preventDefault();
   let user = {
     email: (event.target.querySelector("#email").value),
     password: event.target.querySelector("#pass").value
   };
-  console.log("user", user)
 
-    callApilogin(user).then((res)=>{
-    document.location.href="./index.html"
-    }).catch((error) => {
-      alert("Erreur de saisie")
-      console.error(error);
-    });
-  
-
+callApilogin(user).then((res) => {
+    document.location.href = "./index.html";
+    alert("Vous êtes connecté !");
+    console.log("user", user)
+  })
+  .catch ((error) => {
+  console.log(error);
+  alert ("erreur");
+  });
 });
-  
-   
+
+
   //{"userId":1,"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY3NTUxNzE1OSwiZXhwIjoxNjc1NjAzNTU5fQ.WBBRIWsV4-cp3wY84-k83ZJ6escehX3cmrPRu1xVzXU"}

@@ -3,6 +3,7 @@ async function callApiWorks() {
 	if (!response.ok) {
 		throw new Error(`HTTP error! status: ${response.status}`);
 	}
+    const token = window.localStorage.setItem("token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4");
 	const data = await response.json();
     console.log("Les donnees", data)
     return (data);
@@ -73,6 +74,8 @@ callApiWorks().then((figures) => {
         });
 });
 console.log("b")
+
+
 
 
 

@@ -8,14 +8,8 @@ async function callApilogin(user) {
     },
     body: JSON.stringify(user)
   });
-  if (!response.ok) {
-		throw new Error(`HTTP error! status: ${response.status}`);
-	}
-  let result = await response.json();
-  console.log("a", result)
-  return result
+  return response
 };
-
 
 const formulaire = document.querySelector(".form-login");
 
@@ -29,15 +23,21 @@ formulaire.addEventListener("submit", function (event) {
     password: event.target.querySelector("#pass").value
   };
 
-callApilogin(user).then((res) => {
-    document.location.href = "./index.html";
-    alert("Vous êtes connecté !");
-    console.log("user", user)
+  callApilogin(user).then((res) => {
+    console.log(res)
+    if (!res.ok) {
+      res.json().then((body)=>{
+        throw body.message
+      }).catch((error) => {
+        console.log(error);
+        alert(error);
+      });
+    } else {
+      document.location.href = "./index.html";
+      // alert("Vous êtes connecté !");
+      console.log("user", user)
+    }
   })
-  .catch ((error) => {
-  console.log(error);
-  alert ("erreur");
-  });
 });
 
 

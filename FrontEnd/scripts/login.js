@@ -28,7 +28,6 @@ formulaire.addEventListener("submit", function (event) {
       console.log(res)
       if (!res.ok) {
         window.localStorage.removeItem("token");
-        // boutonLogin.innerHTML = "login";
         res.json().then((body) => {
           throw body.message
         }).catch((error) => {
@@ -48,26 +47,14 @@ formulaire.addEventListener("submit", function (event) {
 
 
 
-/* function seDeconnecter() {
-  boutonLogin.addEventListener("click", function () {
-    window.localStorage.removeItem("token");
-    boutonLogin.innerHTML = "login";
+
+
+const boutonLogin = document.querySelector(".login-logout"); 
+boutonLogin.addEventListener("click", function (event) {
+  event.preventDefault;
+  window.localStorage.removeItem("token");
+  boutonLogin.innerHTML = "login";
   });
-} 
- */
 
 
-
-/* //Récupération des pièces eventuellement stockées dans le localStorage
-let pieces = window.localStorage.getItem('pieces');
-if (pieces === null){
-   // Récupération des pièces depuis l'API
-   const reponse = await fetch('http://localhost:8081/pieces/');
-   pieces = await reponse.json();
-   // Transformation des pièces en JSON
-   const valeurPieces = JSON.stringify(pieces);
-   // Stockage des informations dans le localStorage
-   window.localStorage.setItem("pieces", valeurPieces);
-}else{
-   pieces = JSON.parse(pieces);
-}*/
+// reste a ne pas dirigé en cas de deconnexion et deconnexion, main.js tout en haut

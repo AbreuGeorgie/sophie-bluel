@@ -281,3 +281,29 @@ align-items: center;
 #oublie > a:hover {
 	color: #3D3D3D;
 }
+
+#mode-edition{
+	background-color: black;
+	color: #FFFEF8;
+	font-family: 'Work Sans';
+	font-size: 14px;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 4em;
+	max-width: 1440px;
+	display: none;
+}
+
+#publier-changements{
+	padding: 10px 12px;
+	border-radius: 20px;
+	font-family: 'Work Sans';
+    font-size: 13px;
+}
+
+#edition{
+	padding-right: 2em;
+}
+

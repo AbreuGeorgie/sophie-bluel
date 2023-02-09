@@ -1,11 +1,30 @@
 import {callApiWorks, genererFigure} from "./work.js";
+
 window.addEventListener('DOMContentLoaded', (event) => {
-    if (window.localStorage.getItem("token") == null){
-        document.location.href = "./login.html";
-    } else {
+    if (window.localStorage.getItem("token") != null){
         const boutonLogin = document.querySelector(".login-logout");
         boutonLogin.innerHTML = "logout";
+        document.getElementById("mode-edition").style.display = "flex";
     }
+
+const boutonPublier = document.getElementById("publier-changements");
+boutonPublier.addEventListener("click", function(){
+    /*...*/
+});
+
+const boutonLogin = document.querySelector(".login-logout"); 
+boutonLogin.addEventListener("click", function () {
+    if (window.localStorage.getItem("token") != null){
+        window.localStorage.removeItem("token");
+        boutonLogin.innerHTML = "login";
+    }
+  });
+
+ /*  boutonLogin.removeAttribute('href');
+  je n'arrive pas a ne pas rediriger vers login qd logout, 
+  et quand j'utilise removeAttribut je ne peux plus cliquer 
+  sur login */
+
     callApiWorks().then((figures) => {
         const filtres = new Set([]); 
     

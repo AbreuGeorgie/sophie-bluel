@@ -5,6 +5,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         const boutonLogin = document.querySelector(".login-logout");
         boutonLogin.innerHTML = "logout";
         document.getElementById("mode-edition").style.display = "flex";
+        document.getElementById("modifier").style.display = "block";
     }
 
 const boutonPublier = document.getElementById("publier-changements");
@@ -24,6 +25,8 @@ boutonLogin.addEventListener("click", function () {
   je n'arrive pas a ne pas rediriger vers login qd logout, 
   et quand j'utilise removeAttribut je ne peux plus cliquer 
   sur login */
+
+
 
     callApiWorks().then((figures) => {
         const filtres = new Set([]); 

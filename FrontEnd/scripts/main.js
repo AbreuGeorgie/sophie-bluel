@@ -14,7 +14,8 @@ boutonPublier.addEventListener("click", function(){
 });
 
 const boutonLogin = document.querySelector(".login-logout"); 
-boutonLogin.addEventListener("click", function () {
+boutonLogin.addEventListener("click", function (e) {
+    e.preventDefault
     if (window.localStorage.getItem("token") != null){
         window.localStorage.removeItem("token");
         boutonLogin.innerHTML = "login";

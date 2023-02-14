@@ -11,6 +11,7 @@
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script defer type="module" src="./scripts/main.js"></script>
+	<script defer src="./scripts/modal.js"></script>
 </head>
 <body>
 <div id="mode-edition">
@@ -42,7 +43,7 @@
 	</section>
 	<section id="portfolio">
 			<h2>Mes Projets</h2>
-			<button id="modifier"><i class="fa-light fa-pen-to-square"></i>modifier</button>
+			<button href="#modal1" class="js-modal" id="modifier"><i class="fa-light fa-pen-to-square"></i>modifier</button>
 		<div id="filtres">
 	 		<!-- <button id="btn-tout">Tout</button>
 			<button id="btn-objets">Objets</button>
@@ -96,6 +97,15 @@
 			</figure> -->
 		</div>
 	</section>
+	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titre-modal" style="display: none;">
+		<div id="modal-wrapper" class="js-modal-stop">
+			<button class="js-close-modal">Fermer la boite modale</button>
+			<h3 id="titre-modal">Galerie photo</h3>
+			<div class="gallery"></div>
+			<input type="submit" id="ajouter-projets" value="Ajouter une photo">
+			<button id="supprimer-projets">Supprimer la gallerie</button>
+		</div>
+	</aside>
 	<section id="contact">
 		<h2>Contact</h2>
 		<p>Vous avez un projet ? Discutons-en !</p>

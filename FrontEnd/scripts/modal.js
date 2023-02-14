@@ -1,3 +1,32 @@
+/* import { callApiWorks } from "./work";
+
+function genererImage(work) {
+
+    const projetArchitecte = document.createElement("figure");
+    const gallerie = document.querySelector(".gallery");
+
+    //création des images et nom des projets
+    const imageProjet = document.createElement("img");
+    imageProjet.crossOrigin = "anonymous";
+    imageProjet.src = work.imageUrl;
+    imageProjet.alt = work.title;
+
+    // on rattache les projets de l'architecte à la gallerie
+    gallerie.appendChild(projetArchitecte);
+
+    //ratachement des images et noms des projets aux projets de l'architecte
+    projetArchitecte.appendChild(imageProjet);
+};
+
+
+callApiWorks().then((figures) => {
+    figures.forEach((figure) => {
+        genererImage(figure); // pour chaque projet => generer projet
+    });
+}) 
+
+CA NE MARCHE PAS , COMMENT RECCUPERER LES IMAGES ????*/
+
 
 let modal = null;
 

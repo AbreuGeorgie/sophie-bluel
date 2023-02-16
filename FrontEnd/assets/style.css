@@ -338,20 +338,74 @@ align-items: center;
 	overflow: auto;
 	background-color: white;
 	width: 600px;
+	height: 731px;
 	padding: 20px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh - 20px);
+	display: flex;
+    flex-direction: column;
+    align-items: center;
+	border-radius: 5px;
+}
+
+#titre-modal{
+	font-family: 'Work Sans';
+	font-size: 26px;
+    margin-top: 30px;
+    margin-bottom: 45px;
 }
 
 .gallery-modal {
-	width: 400px;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	height: 412px;
+    width: 70%;
 }
 
 .gallery-modal img {
 	width: 77.37px;
 	height: 108.36px
+}
+
+#modal-wrapper {
+	border: none;
+	font-size: 12px;
+    font-weight: 400;
+}
+
+.js-close-modal {
+	font-size: 20px;
+    background: none;
+    border: none;
+    position: relative;
+    left: 275px;
+    top: 10px;
+}
+
+#ajouter-supprimer{
+	border-top: 1px solid #B3B3B3;
+	margin-top: 50px;
+    width: 68%;
+    display: flex;
+    flex-direction: column;
+}
+
+#ajouter-projets{
+	width: 237px;
+	height: 36px;
+	font-size: 14px;
+	border: none;
+	margin-top: 45px;
+}
+
+#supprimer-projets{
+	color: #D65353;
+	background: none;
+    border: none;
+    font-size: 14px;
+    font-family: 'syne';
+	font-weight: 400;
 
 }
+

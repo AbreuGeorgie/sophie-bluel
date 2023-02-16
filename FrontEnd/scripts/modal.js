@@ -34,6 +34,8 @@ export const openModal = function (e, figures){
     console.log("mes figures dans modal", figures)
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute("href")) // cible l'id modal1
+    const boutonClose= document.querySelector(".js-close-modal")
+    boutonClose.innerHTML = "x"
     focusables = Array.from(modal.querySelectorAll(focusableSelector)) //Array.from pour avoir les éléments focusables dans un tableau
     focusables[0].focus() //permet de selectionner le premier élément focusable avec tab
     modal.style.display = null // enlève de display none attribué dans le HTML

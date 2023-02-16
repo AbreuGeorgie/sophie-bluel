@@ -97,14 +97,22 @@ window.addEventListener("keydown", function(e){
     }
 })
 
-
 const boutonAjouterProjet = document.querySelector("#ajouter-projets");
-const titreModal = document.querySelector("#titre-modal");
-titreModal.innerText = "Ajout photo"
-const ajoutProjets = document.querySelector("#ajout-projets");
-const projets = document.querySelector(".gallery-modal")
-const parentDiv = document.getElementById("modal-wrapper")
 
-/* boutonAjouterProjet.addEventListener("click", function(){
-    titreModal.innerText = "Ajout photo"
-}) */
+const ajouterDesProjets = function ajouterDesProjets(){
+    const titreModal = document.querySelector("#titre-modal");
+    titreModal.innerText = "Ajout photo";
+
+    document.querySelector(".gallery-modal").style.display = "none";
+    document.getElementById("ajout-projets").style.display = "block";
+
+    document.getElementById("ajouter-projets").style.display = "none";
+    document.getElementById("supprimer-projets").style.display = "none";
+    document.getElementById("valider").style.display = "block";
+}
+
+boutonAjouterProjet.addEventListener("click", ajouterDesProjets)
+
+/* ICI IL RESTE A REGLER LE PROBLEME DE STOP PROPAGATION 
+ET DE FAIRE LE RETOUR A LA PREMIERE PAGE MODALE 
++ LE CSS */

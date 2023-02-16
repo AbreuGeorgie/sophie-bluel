@@ -1,32 +1,3 @@
-/* import { callApiWorks } from "./work";
-
-function genererImage(work) {
-
-    const projetArchitecte = document.createElement("figure");
-    const gallerie = document.querySelector(".gallery");
-
-    //création des images et nom des projets
-    const imageProjet = document.createElement("img");
-    imageProjet.crossOrigin = "anonymous";
-    imageProjet.src = work.imageUrl;
-    imageProjet.alt = work.title;
-
-    // on rattache les projets de l'architecte à la gallerie
-    gallerie.appendChild(projetArchitecte);
-
-    //ratachement des images et noms des projets aux projets de l'architecte
-    projetArchitecte.appendChild(imageProjet);
-};
-
-
-callApiWorks().then((figures) => {
-    figures.forEach((figure) => {
-        genererImage(figure); // pour chaque projet => generer projet
-    });
-}) 
-
-CA NE MARCHE PAS , COMMENT RECCUPERER LES IMAGES ????*/
-
 
 let modal = null;
 
@@ -35,7 +6,8 @@ const focusableSelector = "button, a, input, textarea";
 let focusables = []
 
 //focntion qui va permettre d'ouvrir la fenetre modale
-const openModal = function (e){
+export const openModal = function (e, figures){
+    console.log("mes figures dans ma putain de modal", figures)
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute("href")) // cible l'id modal1
     focusables = Array.from(modal.querySelectorAll(focusableSelector)) //Array.from pour avoir les éléments focusables dans un tableau
@@ -81,11 +53,6 @@ const focusInModal = function(e){
     console.log(index)
 }
 
-//fonction qui va appeler a l'ouverture de la modale lors du clique sur le bouton 
-document.querySelectorAll(".js-modal").forEach(a => {
-    a.addEventListener("click", openModal)
-})
-
 //focntion qui va permettre de stopper la propagation 
 const stopPropagation = function(e){
     e.stopPropagation
@@ -100,3 +67,4 @@ window.addEventListener("keydown", function(e){
         focusInModal(e);
     }
 })
+

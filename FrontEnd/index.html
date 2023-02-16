@@ -1,57 +1,64 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Sophie Bluel - Architecte d'intérieur</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Work+Sans&display=swap"
+		rel="stylesheet">
+	<script src="https://kit.fontawesome.com/5b2200d03b.js" crossorigin="anonymous"></script>
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
 	<script defer type="module" src="./scripts/main.js"></script>
 	<script defer type="module" src="./scripts/modal.js"></script>
 </head>
+
 <body>
-<div id="mode-edition">
-	<div id="edition"><i class="fa-light fa-pen-to-square"></i>mode édition</div>
-	<button id="publier-changements">Publier les changements</button>
-</div>
-<header>
-	<h1><a href="index.html">Sophie Bluel <span>Architecte d'intérieur</span></a></h1>
-	<nav>
-		<ul>
-			<li><a href="#">projets</a></li>
-			<li><a href="#contact">contact</a></li>
-			<li><a href="login.html" class="login-logout">login</a></li>
-			<li><a href="#"><img src="./assets/icons/instagram.png" alt="Instagram"></a></li>
-		</ul>
-	</nav>
-</header>
-<main>
-	<section id="introduction">
-		<figure>
-			<img src="./assets/images/sophie-bluel.png" alt="">
-		</figure>
-		<article>
-			<h2>Designer d'espace</h2>
-			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
-			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
-			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
-		</article>
-	</section>
-	<section id="portfolio">
+	<div id="mode-edition">
+		<div id="edition"><i class="fa-regular fa-pen-to-square"></i></i>mode édition</div>
+		<button id="publier-changements">Publier les changements</button>
+	</div>
+	<header>
+		<h1><a href="index.html">Sophie Bluel <span>Architecte d'intérieur</span></a></h1>
+		<nav>
+			<ul>
+				<li><a href="#">projets</a></li>
+				<li><a href="#contact">contact</a></li>
+				<li><a href="login.html" class="login-logout">login</a></li>
+				<li><a href="#"><img src="./assets/icons/instagram.png" alt="Instagram"></a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+		<section id="introduction">
+			<figure>
+				<img src="./assets/images/sophie-bluel.png" alt="">
+			</figure>
+			<article>
+				<h2>Designer d'espace</h2>
+				<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison
+					finale du chantier.</p>
+				<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les
+					couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du
+					chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
+				<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG,
+					décorateur(trice)</p>
+			</article>
+		</section>
+		<section id="portfolio">
 			<h2>Mes Projets</h2>
-			<button href="#modal1" class="js-modal" id="modifier"><i class="fa-light fa-pen-to-square"></i>modifier</button>
-		<div id="filtres">
-	 		<!-- <button id="btn-tout">Tout</button>
+			<button href="#modal1" class="js-modal" id="modifier"><i class="fa-regular fa-pen-to-square"></i>modifier</button>
+			<div id="filtres">
+				<!-- <button id="btn-tout">Tout</button>
 			<button id="btn-objets">Objets</button>
 			<button id="btn-appartements">Appartements</button>
-			<button id="btn-hotels">Hôtels & restaurants</li> --> 
-		</div>
-		<div class="gallery">
-			<!-- <figure>
+			<button id="btn-hotels">Hôtels & restaurants</li> -->
+			</div>
+			<div class="gallery">
+				<!-- <figure>
 				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
 				<figcaption>Abajour Tahina</figcaption>
 			</figure>
@@ -95,14 +102,16 @@
 				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
 				<figcaption>Hotel First Arte - New Delhi</figcaption>
 			</figure> -->
-		</div>
-	</section>
-	<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titre-modal" style="display: none;">
-		<div id="modal-wrapper" class="js-modal-stop">
-			<button class="js-close-modal">Fermer la boite modale</button>
-			<h3 id="titre-modal">Galerie photo</h3>
-			<div class="gallery-modal">
-<!-- 				<figure>
+			</div>
+		</section>
+		<aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titre-modal"
+			style="display: none;">
+			<div id="modal-wrapper" class="js-modal-stop">
+				<button class="retour" style="display: none;"><i class="fa-solid fa-arrow-left"></i></button>
+				<button class="js-close-modal">Fermer la boite modale</button>
+				<h3 id="titre-modal">Galerie photo</h3>
+				<div class="gallery-modal">
+					<!-- 				<figure>
 					<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
 					<figcaption>Abajour Tahina</figcaption>
 				</figure>
@@ -146,34 +155,53 @@
 					<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
 					<figcaption>Hotel First Arte - New Delhi</figcaption>
 				</figure> -->
+				</div>
+				<div id="ajout-projets" style="display: none;">
+					<div id="ajouter-image">
+						<i class="fa-regular fa-image"></i>
+						<button id="ajout">+ Ajouter photo</button>
+						<div id="legende">png, jpg : 4mo max</div>
+					</div>
+					<h4>Titre</h4>
+					<input id="ajouter-titre"></input>
+					<h4>Catégorie</h4>
+					<select id="choisir-categorie" name="Catégorie">
+						<option>Objets</option>
+						<option>Appartements</option>
+						<option>Hotels et restaurants</option>
+					</select>
+				</div>
+				<div id="ajouter-supprimer">
+					<input href="#" type="submit" id="ajouter-projets" value="Ajouter une photo">
+					<button id="supprimer-projets">Supprimer la gallerie</button>
+				</div>
 			</div>
-			<div id="ajouter-supprimer">
-				<input type="submit" id="ajouter-projets" value="Ajouter une photo">
-				<button id="supprimer-projets">Supprimer la gallerie</button>
-			</div>
-		</div>
-	</aside>
-	<section id="contact">
-		<h2>Contact</h2>
-		<p>Vous avez un projet ? Discutons-en !</p>
-		<form action="#" method="post">
-			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
-			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
-			<label for="message">Message</label>
-			<textarea name="message" id="message" cols="30" rows="10"></textarea>
-			<input type="submit" value="Envoyer">
-		</form>
-	</section>
-</main>
+			<div id="modal-ajout-photo">
 
-<footer>
-	<nav>
-		<ul>
-			<li>Mentions Légales</li>
-		</ul>
-	</nav>
-</footer>
+			</div>
+		</aside>
+		<section id="contact">
+			<h2>Contact</h2>
+			<p>Vous avez un projet ? Discutons-en !</p>
+			<form action="#" method="post">
+				<label for="name">Nom</label>
+				<input type="text" name="name" id="name">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email">
+				<label for="message">Message</label>
+				<textarea name="message" id="message" cols="30" rows="10"></textarea>
+				<input type="submit" value="Envoyer">
+			</form>
+		</section>
+	</main>
+
+	<footer>
+		<nav>
+			<ul>
+				<li>Mentions Légales</li>
+			</ul>
+		</nav>
+	</footer>
 </body>
+
 </html>

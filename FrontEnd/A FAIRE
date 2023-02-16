@@ -1,6 +1,5 @@
 
 REMPLACER LES LOGO MODIF PAR DES LOGOS VALIDES voir index.html
 
-INTEGRER LES WORKS DANS LA MODALE je n'arrive pas a insérer les works voir modal.js
+Stop propagation modal qui ne marche plus
 
-LOGO CROIX A LA PLACE DU TEXTE DANS MODALE voir modal.js

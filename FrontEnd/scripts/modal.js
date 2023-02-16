@@ -35,7 +35,7 @@ export const openModal = function (e, figures){
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute("href")) // cible l'id modal1
     const boutonClose= document.querySelector(".js-close-modal")
-    boutonClose.innerHTML = "x"
+    boutonClose.innerHTML = "x" //remplace par une croix
     focusables = Array.from(modal.querySelectorAll(focusableSelector)) //Array.from pour avoir les éléments focusables dans un tableau
     focusables[0].focus() //permet de selectionner le premier élément focusable avec tab
     modal.style.display = null // enlève de display none attribué dans le HTML
@@ -43,7 +43,9 @@ export const openModal = function (e, figures){
     modal.setAttribute("aria-modal", "true")//permet d'indiquer aux technologies d'assistance que les fenetre situées sous la boite de dialogue ne font pas partie de la boite modal (accessibilité)
     modal.addEventListener("click", closeModal)//permet de fermer la fenetre lors du click
     modal.querySelector(".js-close-modal").addEventListener("click", closeModal)//permet de fermer la modal lors du clique sur le bouton
+    console.log("a")
     modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)//permet de stopper la propagation de fermeture lors du clique a l'interieur de la modale
+    console.log("b")
 }
 
 //fonction qui va permettre de fermer la fenetre modale
@@ -94,3 +96,15 @@ window.addEventListener("keydown", function(e){
         focusInModal(e);
     }
 })
+
+
+const boutonAjouterProjet = document.querySelector("#ajouter-projets");
+const titreModal = document.querySelector("#titre-modal");
+titreModal.innerText = "Ajout photo"
+const ajoutProjets = document.querySelector("#ajout-projets");
+const projets = document.querySelector(".gallery-modal")
+const parentDiv = document.getElementById("modal-wrapper")
+
+/* boutonAjouterProjet.addEventListener("click", function(){
+    titreModal.innerText = "Ajout photo"
+}) */

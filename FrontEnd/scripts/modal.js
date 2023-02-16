@@ -1,3 +1,24 @@
+function genererFigureModal(work) {
+
+    const projetArchitecte = document.createElement("figure");
+    const gallerieModal = document.querySelector(".gallery-modal");
+
+    //création des images et nom des projets
+    const imageProjet = document.createElement("img");
+    imageProjet.crossOrigin = "anonymous";
+    imageProjet.src = work.imageUrl;
+    imageProjet.alt = work.title;
+    const nomProjet = document.createElement("figcaption");
+    nomProjet.innerText = "éditer";
+
+    // on rattache les projets de l'architecte à la gallerie
+    gallerieModal.appendChild(projetArchitecte);
+
+    //ratachement des images et noms des projets aux projets de l'architecte
+    projetArchitecte.appendChild(imageProjet);
+    projetArchitecte.appendChild(nomProjet);
+};
+
 
 let modal = null;
 
@@ -7,7 +28,10 @@ let focusables = []
 
 //focntion qui va permettre d'ouvrir la fenetre modale
 export const openModal = function (e, figures){
-    console.log("mes figures dans ma putain de modal", figures)
+    figures.forEach((figure) => {
+        genererFigureModal(figure); // pour chaque projet => generer projet
+    });
+    console.log("mes figures dans modal", figures)
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute("href")) // cible l'id modal1
     focusables = Array.from(modal.querySelectorAll(focusableSelector)) //Array.from pour avoir les éléments focusables dans un tableau
@@ -24,6 +48,7 @@ export const openModal = function (e, figures){
 const closeModal = function(e) {
     if (modal === null) return  //si la modale s'affiche
     e.preventDefault(); 
+    document.querySelector(".gallery-modal").innerHTML = "";
     modal.style.display = "none"; // ne plus afficher la modale
     modal.setAttribute("aria-hidden", "true"); //on masque la modale pour les lecteurs d'écran (accessibilité)
     modal.removeAttribute("aria-modal"); // on indique les fenetres sous la modale redevienne active (accessibilité)
@@ -67,4 +92,3 @@ window.addEventListener("keydown", function(e){
         focusInModal(e);
     }
 })
-

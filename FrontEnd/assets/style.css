@@ -178,19 +178,22 @@ nav a:visited {
 
 .gallery img {
 	width: 100%;
-
 }
+
 #contact {
 	width: 50%;
 margin: auto;
 }
+
 #contact > * {
 	text-align: center;
 
 }
+
 #contact h2{
 	margin-bottom: 20px;
 }
+
 #contact form {
 	text-align: left;
 	margin-top:30px;
@@ -204,9 +207,11 @@ margin: auto;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
+
 #contact label {
 	margin: 2em 0 1em 0;
 }
+
 #contact textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -336,4 +341,17 @@ align-items: center;
 	padding: 20px;
 	max-width: calc(100vw - 20px);
 	max-height: calc(100vh - 20px);
+}
+
+.gallery-modal {
+	width: 400px;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.gallery-modal img {
+	width: 77.37px;
+	height: 108.36px
+
 }

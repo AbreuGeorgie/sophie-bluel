@@ -131,3 +131,11 @@ const retourPageAccueilModale = function retourPageAccueilModale(){
 boutonAjouterProjet.addEventListener("click", ajouterDesProjets);
 
 boutonRetour.addEventListener("click", retourPageAccueilModale);
+
+const photoSelector = document.getElementById('ajout-photo')
+
+photoSelector.addEventListener('change', event => {
+    const files = event.target.files
+
+    console.log(files)
+})

@@ -43,9 +43,7 @@ export const openModal = function (e, figures){
     modal.setAttribute("aria-modal", "true")//permet d'indiquer aux technologies d'assistance que les fenetre situées sous la boite de dialogue ne font pas partie de la boite modal (accessibilité)
     modal.addEventListener("click", closeModal)//permet de fermer la fenetre lors du click
     modal.querySelector(".js-close-modal").addEventListener("click", closeModal)//permet de fermer la modal lors du clique sur le bouton
-    console.log("a")
     modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)//permet de stopper la propagation de fermeture lors du clique a l'interieur de la modale
-    console.log("b")
 }
 
 //fonction qui va permettre de fermer la fenetre modale
@@ -59,7 +57,9 @@ const closeModal = function(e) {
     modal.removeEventListener("click", closeModal); // on retire l'écoute du clique 
     modal.querySelector(".js-close-modal").removeEventListener("click", closeModal); //on retire la fermeture de la modale
     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation); // on retire le stop de propagation pour la fermeture
+    retourPageAccueilModale();
     modal = null; // on remet la valeur de la modal a null
+
 }
 
 //fonction qui va permettre de selectionner les elements focusable
@@ -84,7 +84,8 @@ const focusInModal = function(e){
 
 //focntion qui va permettre de stopper la propagation 
 const stopPropagation = function(e){
-    e.stopPropagation
+    e.stopPropagation()
+    console.log("stop propagation")
 }
 
 //fonction qui écoute les cliques du clavier et permet de fermer la modal ou selectionner un element focusable avec tab
@@ -97,22 +98,36 @@ window.addEventListener("keydown", function(e){
     }
 })
 
+//constante de la page modale ajouter projets
 const boutonAjouterProjet = document.querySelector("#ajouter-projets");
+const boutonRetour = document.querySelector(".fleche-retour");
+const boutonSupprimerProjet = document.getElementById("supprimer-projets");
+const boutonValider = document.getElementById("valider");
+const ajoutProjet = document.getElementById("ajout-projets");
+const titreModal = document.querySelector("#titre-modal");
 
 const ajouterDesProjets = function ajouterDesProjets(){
-    const titreModal = document.querySelector("#titre-modal");
     titreModal.innerText = "Ajout photo";
 
     document.querySelector(".gallery-modal").style.display = "none";
-    document.getElementById("ajout-projets").style.display = "block";
-
+    ajoutProjet.style.display = "block";
+    boutonRetour.style.display = "block";
     document.getElementById("ajouter-projets").style.display = "none";
-    document.getElementById("supprimer-projets").style.display = "none";
-    document.getElementById("valider").style.display = "block";
-}
+    boutonSupprimerProjet.style.display = "none";
+    boutonValider.style.display = "block";
+};
 
-boutonAjouterProjet.addEventListener("click", ajouterDesProjets)
+const retourPageAccueilModale = function retourPageAccueilModale(){
+    titreModal.innerText = "Galerie photo";
 
-/* ICI IL RESTE A REGLER LE PROBLEME DE STOP PROPAGATION 
-ET DE FAIRE LE RETOUR A LA PREMIERE PAGE MODALE 
-+ LE CSS */
+    document.querySelector(".gallery-modal").style.display = "flex";
+    ajoutProjet.style.display = "none";
+    boutonRetour.style.display = "none";
+    document.getElementById("ajouter-projets").style.display = "block";
+    boutonSupprimerProjet.style.display = "block";
+    boutonValider.style.display = "none";
+};
+
+boutonAjouterProjet.addEventListener("click", ajouterDesProjets);
+
+boutonRetour.addEventListener("click", retourPageAccueilModale);

@@ -156,14 +156,18 @@
 					<figcaption>Hotel First Arte - New Delhi</figcaption>
 				</figure> -->
 				</div>
-				<div id="ajout-projets" style="display: none;">
+				<form id="ajout-projets" style="display: none;">
 					<div id="ajouter-image">
 						<i class="fa-regular fa-image"></i>
 						<!-- <button id="ajout-photo">+ Ajouter photo</button> -->
 						<!-- <input type="file"
 							id="ajout-photo" name="avatar"
 							accept="image/png, image/jpeg"> -->
-							<input type="file" id="ajout-photo" multiple  accept=".jpg, .jpeg, .png" />
+							<div id="parent-div">
+								<button id="ajout-photo">+ Ajouter photo</button>
+								<input type="file" multiple  accept=".jpg, .jpeg, .png" />
+						<!-- 	<input type="file" id="ajout-photo" multiple  accept=".jpg, .jpeg, .png" /> -->
+							</div>
 						<div id="legende-photo">png, jpg : 4mo max</div>
 					</div>
 					<h4>Titre</h4>
@@ -174,9 +178,11 @@
 						<option>Appartements</option>
 						<option>Hotels et restaurants</option>
 					</select>
-				</div>
+					<div id="conteneur-valider">
+						<input type="submit" id="valider" value="Valider">
+					</div>
+				</form>
 				<div id="ajouter-supprimer">
-					<input type="submit" id="valider" value="Valider" style="display: none;">
 					<input href="#" type="submit" id="ajouter-projets" value="Ajouter une photo">
 					<button id="supprimer-projets">Supprimer la gallerie</button>
 				</div>

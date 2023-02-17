@@ -101,7 +101,7 @@ window.addEventListener("keydown", function(e){
 //constante de la page modale ajouter projets
 const boutonAjouterProjet = document.querySelector("#ajouter-projets");
 const boutonRetour = document.querySelector(".fleche-retour");
-const boutonSupprimerProjet = document.getElementById("supprimer-projets");
+const ajouterSupprimerProjets = document.getElementById("ajouter-supprimer");
 const boutonValider = document.getElementById("valider");
 const ajoutProjet = document.getElementById("ajout-projets");
 const titreModal = document.querySelector("#titre-modal");
@@ -113,7 +113,7 @@ const ajouterDesProjets = function ajouterDesProjets(){
     ajoutProjet.style.display = "block";
     boutonRetour.style.display = "block";
     document.getElementById("ajouter-projets").style.display = "none";
-    boutonSupprimerProjet.style.display = "none";
+    ajouterSupprimerProjets.style.display = "none";
     boutonValider.style.display = "block";
 };
 
@@ -123,8 +123,7 @@ const retourPageAccueilModale = function retourPageAccueilModale(){
     document.querySelector(".gallery-modal").style.display = "flex";
     ajoutProjet.style.display = "none";
     boutonRetour.style.display = "none";
-    document.getElementById("ajouter-projets").style.display = "block";
-    boutonSupprimerProjet.style.display = "block";
+    ajouterSupprimerProjets.style.display = "flex";
     boutonValider.style.display = "none";
 };
 

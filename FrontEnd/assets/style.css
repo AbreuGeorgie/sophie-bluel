@@ -435,7 +435,21 @@ align-items: center;
 	color: #B9C5CC;
 }
 
-#ajout-photo{
+#parent-div {
+	display: inline-block;
+	position: relative;
+	overflow: hidden;
+}
+
+#parent-div input[type=file] {
+	left: 0;
+	top: 0;
+	opacity: 0;
+	position: absolute;
+	font-size: 90px;
+}
+
+#ajout-photo {
     color: #306685;
     background-color: #CBD6DC;
     display: flex;
@@ -475,10 +489,15 @@ h4{
 	font-size: 14px;
 }
 
+#conteneur-valider{
+	border-top: 1px solid #B3B3B3;
+	margin-top: 50px;
+}
+
 #valider{
 	border: none;
     height: 30px;
-    width: 200px;
 	background-color: #A7A7A7;
+    width: 68%;
 }
 

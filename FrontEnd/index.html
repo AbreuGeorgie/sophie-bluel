@@ -113,6 +113,7 @@
 				<div class="gallery-modal">
 					<!-- 				<figure>
 					<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
+					<button id="supprimer"><i class="fa-solid fa-trash-can"></i></button>
 					<figcaption>Abajour Tahina</figcaption>
 				</figure>
 				<figure>
@@ -155,18 +156,16 @@
 					<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
 					<figcaption>Hotel First Arte - New Delhi</figcaption>
 				</figure> -->
+				<i class="fa-solid fa-trash-can"></i>
 				</div>
-				<form id="ajout-projets" style="display: none;">
+				<form id="ajout-projets" method="post" url="/upload-picture" enctype="multipart/form-data" style="display: none;">
 					<div id="ajouter-image">
 						<i class="fa-regular fa-image"></i>
-						<!-- <button id="ajout-photo">+ Ajouter photo</button> -->
-						<!-- <input type="file"
-							id="ajout-photo" name="avatar"
-							accept="image/png, image/jpeg"> -->
 							<div id="parent-div">
 								<button id="ajout-photo">+ Ajouter photo</button>
-								<input type="file" multiple  accept=".jpg, .jpeg, .png" />
-						<!-- 	<input type="file" id="ajout-photo" multiple  accept=".jpg, .jpeg, .png" /> -->
+								<input type="file" accept=".jpg, .jpeg, .png" id="file" onChange="previewPicture()" required/>	
+								<img src="" id="img-preview" alt="Prévisualisation de l'image…">
+								<label for="file" id="file-preview">
 							</div>
 						<div id="legende-photo">png, jpg : 4mo max</div>
 					</div>

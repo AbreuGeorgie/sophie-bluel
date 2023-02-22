@@ -11,12 +11,15 @@ function genererFigureModal(work) {
     const nomProjet = document.createElement("figcaption");
     nomProjet.innerText = "éditer";
 
+    const logoPoubelle = document.querySelector(".fa-trash-can");
     // on rattache les projets de l'architecte à la gallerie
     gallerieModal.appendChild(projetArchitecte);
 
     //ratachement des images et noms des projets aux projets de l'architecte
     projetArchitecte.appendChild(imageProjet);
     projetArchitecte.appendChild(nomProjet);
+    projetArchitecte.appendChild(logoPoubelle);
+
 };
 
 
@@ -106,6 +109,10 @@ const boutonValider = document.getElementById("valider");
 const ajoutProjet = document.getElementById("ajout-projets");
 const titreModal = document.querySelector("#titre-modal");
 
+//Ajout logo poubelle
+
+
+//modifier page galerie photo par page ajout photo
 const ajouterDesProjets = function ajouterDesProjets(){
     titreModal.innerText = "Ajout photo";
 
@@ -117,6 +124,7 @@ const ajouterDesProjets = function ajouterDesProjets(){
     boutonValider.style.display = "block";
 };
 
+//retourner a la page d'accueil modale
 const retourPageAccueilModale = function retourPageAccueilModale(){
     titreModal.innerText = "Galerie photo";
 
@@ -124,17 +132,32 @@ const retourPageAccueilModale = function retourPageAccueilModale(){
     ajoutProjet.style.display = "none";
     boutonRetour.style.display = "none";
     ajouterSupprimerProjets.style.display = "flex";
+    boutonAjouterProjet.style.display = "block";
     boutonValider.style.display = "none";
 };
 
 boutonAjouterProjet.addEventListener("click", ajouterDesProjets);
-
 boutonRetour.addEventListener("click", retourPageAccueilModale);
 
+/* //selectionner l'image du nouveau projet
 const photoSelector = document.getElementById('ajout-photo')
-
 photoSelector.addEventListener('change', event => {
     const files = event.target.files
 
     console.log(files)
-})
+}) */
+
+window.onload=function previewPicture() {
+    const preview = document.querySelector('#img-preview');
+    const file = document.querySelector('input[type=file]').files[0];
+    const reader = new FileReader();
+  
+    reader.addEventListener("load", () => {
+      // on convertit l'image en une chaîne de caractères base64
+      preview.src = reader.result;
+    }, false);
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  } 

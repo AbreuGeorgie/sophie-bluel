@@ -5,4 +5,4 @@ previewPicture is not defined
 pourquoi le logo poubelle ne se met qu'une fois alors qu'il 
 devrait etre appelé a chaque figure
 
-fetch delete
+fetch delete erreur401 non autorisé

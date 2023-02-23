@@ -501,9 +501,28 @@ h4{
     width: 68%;
 }
 
+
+/* .bouton-poubelle{
+	background: black;
+	border: none;
+	padding: 6px 8px;
+    border-radius: 4px;
+	
+	position: relative;
+    bottom: 58em;
+    right: 4em;
+} */
+
 .fa-trash-can:before {
-    position: relative;
-    top: -120px;
-    left: 65px;
+    color: white;
 }
 
+.bouton-poubelle{
+	padding: 3px 5px;
+    position: relative;
+    bottom: 118px;
+    left: 52px;
+    background: black;
+    border: none;
+    border-radius: 3px; 
+}

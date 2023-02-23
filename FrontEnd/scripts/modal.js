@@ -11,18 +11,28 @@ function genererFigureModal(work) {
     const nomProjet = document.createElement("figcaption");
     nomProjet.innerText = "éditer";
 
-    const logoPoubelle = document.querySelector(".fa-trash-can");
+    //création du logo poubelle dans le boutton
+    const boutonPoubelle = document.createElement("button")
+    const logoPoubelle = document.createElement("i");
+    boutonPoubelle.className = "bouton-poubelle";
+    logoPoubelle.className = "fa-solid fa-trash-can";
+
+    //on rattache le logo au bouton poubelle
+    boutonPoubelle.appendChild(logoPoubelle);
+
     // on rattache les projets de l'architecte à la gallerie
     gallerieModal.appendChild(projetArchitecte);
 
     //ratachement des images et noms des projets aux projets de l'architecte
     projetArchitecte.appendChild(imageProjet);
     projetArchitecte.appendChild(nomProjet);
-    projetArchitecte.appendChild(logoPoubelle);
-
+    projetArchitecte.appendChild(boutonPoubelle);
 };
 
 
+
+
+//------ ouverture / fermeture modale ----------//
 let modal = null;
 
 //variable qui permet d'identifier les différents éléments focusables 
@@ -33,6 +43,7 @@ let focusables = []
 export const openModal = function (e, figures){
     figures.forEach((figure) => {
         genererFigureModal(figure); // pour chaque projet => generer projet
+
     });
     console.log("mes figures dans modal", figures)
     e.preventDefault()
@@ -64,6 +75,12 @@ const closeModal = function(e) {
     modal = null; // on remet la valeur de la modal a null
 
 }
+
+//-----------------------------------------------------------//
+
+
+
+
 
 //fonction qui va permettre de selectionner les elements focusable
 const focusInModal = function(e){
@@ -161,3 +178,31 @@ window.onload=function previewPicture() {
       reader.readAsDataURL(file);
     }
   } 
+
+
+
+
+
+
+
+
+ /*  
+  //fetch delete
+const logoPoubelle = document.querySelector('.fa-trash-can')
+logoPoubelle.addEventListener("click", callApiDelete);
+
+async function callApiDelete(work) {
+    const response = await fetch('http://localhost:5678/api/works/{id}', {
+      method: 'DELETE',
+      headers: {
+        'accept': '/*',
+        'Authorization' : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4'
+      }})
+    
+      .then(res => res.json()) 
+      .then(res => console.log(res))
+  };
+ */
+
+
+

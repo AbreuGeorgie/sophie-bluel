@@ -3,7 +3,6 @@ async function callApilogin(user) {
   const response = await fetch('http://localhost:5678/api/users/login', {
     method: 'POST',
     headers: {
-      'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(user)
@@ -41,7 +40,7 @@ formulaire.addEventListener("submit", function (event) {
       } else {
         document.location.href = "./index.html"; //retour à la page d'accueil si connexion ok 
         const token = res.json().then((body) => { //reccuperation du token
-          console.log("token", body.token);
+      console.log("token", body.token);
           let tokenUser = window.sessionStorage.setItem("token", body.token); //enregistrer le token dans le sessionstorage
         });
       }

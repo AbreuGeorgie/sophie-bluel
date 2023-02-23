@@ -16,6 +16,7 @@ function genererFigureModal(work) {
     const logoPoubelle = document.createElement("i");
     boutonPoubelle.className = "bouton-poubelle";
     logoPoubelle.className = "fa-solid fa-trash-can";
+    boutonPoubelle.dataset.workId = work.id
 
     //on rattache le logo au bouton poubelle
     boutonPoubelle.appendChild(logoPoubelle);
@@ -27,10 +28,28 @@ function genererFigureModal(work) {
     projetArchitecte.appendChild(imageProjet);
     projetArchitecte.appendChild(nomProjet);
     projetArchitecte.appendChild(boutonPoubelle);
+
+    //supprimer des éléments de la gallerie
+    boutonPoubelle.addEventListener("click", function (e) {
+        console.log(e.target.parentElement)
+        if ("workId" in e.target.parentElement.dataset === true) {
+            const id = e.target.parentElement.dataset.workId
+            let token = window.sessionStorage.getItem("token")
+            console.log("token", token)
+            fetch('http://localhost:5678/api/works/' + id, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `bearer ${token}`,
+                    'Content-Type': 'application/json'
+                  },
+            })
+                .then(res => res.json()) // or res.json()
+                .then(res => console.log(res))
+
+        }
+    })
+
 };
-
-
-
 
 //------ ouverture / fermeture modale ----------//
 let modal = null;
@@ -40,15 +59,14 @@ const focusableSelector = "button, a, input, textarea";
 let focusables = []
 
 //focntion qui va permettre d'ouvrir la fenetre modale
-export const openModal = function (e, figures){
+export const openModal = function (e, figures) {
     figures.forEach((figure) => {
         genererFigureModal(figure); // pour chaque projet => generer projet
-
     });
     console.log("mes figures dans modal", figures)
     e.preventDefault()
     modal = document.querySelector(e.target.getAttribute("href")) // cible l'id modal1
-    const boutonClose= document.querySelector(".js-close-modal")
+    const boutonClose = document.querySelector(".js-close-modal")
     boutonClose.innerHTML = "x" //remplace par une croix
     focusables = Array.from(modal.querySelectorAll(focusableSelector)) //Array.from pour avoir les éléments focusables dans un tableau
     focusables[0].focus() //permet de selectionner le premier élément focusable avec tab
@@ -61,9 +79,9 @@ export const openModal = function (e, figures){
 }
 
 //fonction qui va permettre de fermer la fenetre modale
-const closeModal = function(e) {
+const closeModal = function (e) {
     if (modal === null) return  //si la modale s'affiche
-    e.preventDefault(); 
+    e.preventDefault();
     document.querySelector(".gallery-modal").innerHTML = "";
     modal.style.display = "none"; // ne plus afficher la modale
     modal.setAttribute("aria-hidden", "true"); //on masque la modale pour les lecteurs d'écran (accessibilité)
@@ -83,19 +101,19 @@ const closeModal = function(e) {
 
 
 //fonction qui va permettre de selectionner les elements focusable
-const focusInModal = function(e){
+const focusInModal = function (e) {
     e.preventDefault()
     let index = focusables.findIndex(f => f === modal.querySelector(":focus"))
-    if (e.shiftKey === true){
+    if (e.shiftKey === true) {
         index--
     } else {
         index++
     }
-    if (index >= focusables.length){
+    if (index >= focusables.length) {
         index = 0
     }
-    if (index < 0){
-        index = focusables.length -1
+    if (index < 0) {
+        index = focusables.length - 1
     }
     focusables[index].focus();
 
@@ -103,20 +121,25 @@ const focusInModal = function(e){
 }
 
 //focntion qui va permettre de stopper la propagation 
-const stopPropagation = function(e){
+const stopPropagation = function (e) {
     e.stopPropagation()
     console.log("stop propagation")
 }
 
 //fonction qui écoute les cliques du clavier et permet de fermer la modal ou selectionner un element focusable avec tab
-window.addEventListener("keydown", function(e){
-    if (e.key === "Escape" || e.key === "Esc"){
+window.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" || e.key === "Esc") {
         closeModal(e)
     }
-    if (e.key === "Tab" && modal !== null){
+    if (e.key === "Tab" && modal !== null) {
         focusInModal(e);
     }
 })
+
+
+
+
+/* ------ passage de la premiere page modale à la deuxieme ------- */
 
 //constante de la page modale ajouter projets
 const boutonAjouterProjet = document.querySelector("#ajouter-projets");
@@ -126,11 +149,8 @@ const boutonValider = document.getElementById("valider");
 const ajoutProjet = document.getElementById("ajout-projets");
 const titreModal = document.querySelector("#titre-modal");
 
-//Ajout logo poubelle
-
-
 //modifier page galerie photo par page ajout photo
-const ajouterDesProjets = function ajouterDesProjets(){
+const ajouterDesProjets = function ajouterDesProjets() {
     titreModal.innerText = "Ajout photo";
 
     document.querySelector(".gallery-modal").style.display = "none";
@@ -142,7 +162,7 @@ const ajouterDesProjets = function ajouterDesProjets(){
 };
 
 //retourner a la page d'accueil modale
-const retourPageAccueilModale = function retourPageAccueilModale(){
+const retourPageAccueilModale = function retourPageAccueilModale() {
     titreModal.innerText = "Galerie photo";
 
     document.querySelector(".gallery-modal").style.display = "flex";
@@ -156,6 +176,12 @@ const retourPageAccueilModale = function retourPageAccueilModale(){
 boutonAjouterProjet.addEventListener("click", ajouterDesProjets);
 boutonRetour.addEventListener("click", retourPageAccueilModale);
 
+/* ------------------------------------------------------------- */
+
+
+
+
+
 /* //selectionner l'image du nouveau projet
 const photoSelector = document.getElementById('ajout-photo')
 photoSelector.addEventListener('change', event => {
@@ -164,20 +190,20 @@ photoSelector.addEventListener('change', event => {
     console.log(files)
 }) */
 
-window.onload=function previewPicture() {
+window.onload = function previewPicture() {
     const preview = document.querySelector('#img-preview');
     const file = document.querySelector('input[type=file]').files[0];
     const reader = new FileReader();
-  
+
     reader.addEventListener("load", () => {
-      // on convertit l'image en une chaîne de caractères base64
-      preview.src = reader.result;
+        // on convertit l'image en une chaîne de caractères base64
+        preview.src = reader.result;
     }, false);
-  
+
     if (file) {
-      reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
     }
-  } 
+}
 
 
 
@@ -186,23 +212,23 @@ window.onload=function previewPicture() {
 
 
 
- /*  
-  //fetch delete
+/*
+ //fetch delete
 const logoPoubelle = document.querySelector('.fa-trash-can')
 logoPoubelle.addEventListener("click", callApiDelete);
 
 async function callApiDelete(work) {
-    const response = await fetch('http://localhost:5678/api/works/{id}', {
-      method: 'DELETE',
-      headers: {
-        'accept': '/*',
-        'Authorization' : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4'
-      }})
-    
-      .then(res => res.json()) 
-      .then(res => console.log(res))
-  };
- */
+   const response = await fetch('http://localhost:5678/api/works/{id}', {
+     method: 'DELETE',
+     headers: {
+       'accept': '/*',
+       'Authorization' : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4'
+     }})
+   
+     .then(res => res.json()) 
+     .then(res => console.log(res))
+ };
+*/
 
 
 

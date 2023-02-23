@@ -15,9 +15,9 @@ const formulaire = document.querySelector(".form-login"); //reccuperation du for
 
 //fonction evenement lors du clique connexion
 formulaire.addEventListener("submit", function (event) {
-  for (let input of document.querySelectorAll(".form input")) {
+/*   for (let input of document.querySelectorAll(".form input")) {
     input.reportValidity();
-  }
+  } */
   event.preventDefault();
   //creation objet utilisateur email/password
   let user = {
@@ -40,12 +40,12 @@ formulaire.addEventListener("submit", function (event) {
       } else {
         document.location.href = "./index.html"; //retour à la page d'accueil si connexion ok 
         const token = res.json().then((body) => { //reccuperation du token
-      console.log("token", body.token);
+          console.log("token", body.token);
           let tokenUser = window.sessionStorage.setItem("token", body.token); //enregistrer le token dans le sessionstorage
         });
       }
     })
-  });
+});
 
 
 /*  boutonLogin.removeAttribute('href');

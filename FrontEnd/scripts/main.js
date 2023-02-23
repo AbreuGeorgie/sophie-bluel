@@ -5,7 +5,9 @@ import { openModal } from "./modal.js";
 
 //Affichage des éléments une fois la page chargée
 window.addEventListener('DOMContentLoaded', (event) => {
-    if (window.sessionStorage.getItem("token") != null) {
+    let token = window.sessionStorage.getItem("token")
+    if (token !== null) {
+        console.log(token, 'connecté')
         // si connecté alors:
         const boutonLogin = document.querySelector(".login-logout");
         boutonLogin.innerHTML = "logout";
@@ -43,6 +45,7 @@ boutonLogin.addEventListener("click", function (e) {
         boutonLogin.innerHTML = "login";
         document.getElementById("mode-edition").style.display = null;
         document.getElementById("modifier").style.display = null;
+        
     }
 });
 

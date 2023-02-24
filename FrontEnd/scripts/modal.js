@@ -41,11 +41,10 @@ function genererFigureModal(work) {
                 headers: {
                     'Authorization': `bearer ${token}`,
                     'Content-Type': 'application/json'
-                  },
+                },
             })
                 .then(res => res.json()) // or res.json()
                 .then(res => console.log(res))
-
         }
     })
 
@@ -137,8 +136,6 @@ window.addEventListener("keydown", function (e) {
 })
 
 
-
-
 /* ------ passage de la premiere page modale à la deuxieme ------- */
 
 //constante de la page modale ajouter projets
@@ -190,45 +187,101 @@ photoSelector.addEventListener('change', event => {
     console.log(files)
 }) */
 
-window.onload = function previewPicture() {
+function previewFile() {
     const preview = document.querySelector('#img-preview');
     const file = document.querySelector('input[type=file]').files[0];
     const reader = new FileReader();
 
     reader.addEventListener("load", () => {
-        // on convertit l'image en une chaîne de caractères base64
+        console.log("dacdac")
+        // on convertit l'image en une chaîne de caractères
         preview.src = reader.result;
+        console.log("ok", result)
     }, false);
 
     if (file) {
         reader.readAsDataURL(file);
+        console.log("c'est bon")
     }
 }
 
 
 
+//------------------ Ajouter un projet --------------------------
 
+async function callApiAjouterFigure(work) {
+    let token = window.sessionStorage.getItem("token")
+    console.log("tokenAjouterProjet", token)
+    const response = await fetch('http://localhost:5678/api/works', {
+        method: 'POST',
+        headers: {
+            'accept': 'application/json',
+            'Authorization': `bearer ${token}`,
+            'Content-Type': 'multipart/form-data'
+        },
+        body: JSON.stringify(work)
+    })
+    return response
+};
 
+function boutonEnvoyerForm() {
 
+    const photo = document.getElementById("file");
+    const titre = document.getElementById("ajouter-titre");
+    const valider = document.getElementById("valider")
 
+    titre.addEventListener("change", function () {
+        if (photo.value != "" && titre.value != "") {
+            valider.removeAttribute("disabled");
+            valider.style.backgroundColor = "#1D6154"
+        }
+    })
 
-/*
- //fetch delete
-const logoPoubelle = document.querySelector('.fa-trash-can')
-logoPoubelle.addEventListener("click", callApiDelete);
+    photo.addEventListener("change", function () {
+        if (photo.value != "" && titre.value != "") {
+            valider.removeAttribute("disabled");
+            valider.style.backgroundColor = "#1D6154"
+        }
+    })
+}
 
-async function callApiDelete(work) {
-   const response = await fetch('http://localhost:5678/api/works/{id}', {
-     method: 'DELETE',
-     headers: {
-       'accept': '/*',
-       'Authorization' : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1MTg3NDkzOSwiZXhwIjoxNjUxOTYxMzM5fQ.JGN1p8YIfR-M-5eQ-Ypy6Ima5cKA4VbfL2xMr2MgHm4'
-     }})
-   
-     .then(res => res.json()) 
-     .then(res => console.log(res))
- };
-*/
+boutonEnvoyerForm()
+
+function formAjouterProjets() {
+    const formAjoutProjets = document.querySelector("#ajout-projets"); //reccuperation du formulaire
+
+    formAjoutProjets.addEventListener("submit", function (event) {
+        event.preventDefault();
+        //creation objet work
+        let work = {
+            image: (event.target.querySelector("#file").value),
+            title: (event.target.querySelector("#ajouter-titre").value),
+            category: (event.target.querySelector("#choisir-categorie").value)
+        };
+
+        //appel à l'api
+        callApiAjouterFigure(work)
+            .then((res) => {
+                console.log(res)
+                if (!res.ok) { //si la connexion ne se fait pas
+                    res.json().then((body) => {
+                        throw body.message
+                    }).catch((error) => {
+                        console.log(error);
+                        alert(error);
+                    });
+                } else {
+                    retourPageAccueilModale;
+                }
+            });
+
+    });
+
+}
+
+formAjouterProjets();
+
+//--------------------------------------------------------------------
 
 
 

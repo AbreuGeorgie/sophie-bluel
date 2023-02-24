@@ -15,9 +15,9 @@ const formulaire = document.querySelector(".form-login"); //reccuperation du for
 
 //fonction evenement lors du clique connexion
 formulaire.addEventListener("submit", function (event) {
-/*   for (let input of document.querySelectorAll(".form input")) {
-    input.reportValidity();
-  } */
+  /*   for (let input of document.querySelectorAll(".form input")) {
+      input.reportValidity();
+    } */
   event.preventDefault();
   //creation objet utilisateur email/password
   let user = {
@@ -46,12 +46,3 @@ formulaire.addEventListener("submit", function (event) {
       }
     })
 });
-
-
-/*  boutonLogin.removeAttribute('href');
-je n'arrive pas a ne pas rediriger vers login qd logout,
-et quand j'utilise removeAttribut je ne peux plus cliquer
-sur login */
-
-
-// reste a ne pas dirigé en cas de deconnexion et deconnexion, main.js tout en haut

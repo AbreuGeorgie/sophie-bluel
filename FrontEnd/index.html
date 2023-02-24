@@ -49,7 +49,7 @@
 			</article>
 		</section>
 
-<!-- 		<section id="essai">
+		<!-- 		<section id="essai">
 			<figure>
 					<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
 					<button class="bouton-poubelle"> <i class="fa-solid fa-trash-can"></i> </button>
@@ -59,7 +59,8 @@
 
 		<section id="portfolio">
 			<h2>Mes Projets</h2>
-			<button href="#modal1" class="js-modal" id="modifier" ><i class="fa-regular fa-pen-to-square"></i>modifier</button>
+			<button href="#modal1" class="js-modal" id="modifier"><i
+					class="fa-regular fa-pen-to-square"></i>modifier</button>
 			<div id="filtres">
 				<!-- <button id="btn-tout">Tout</button>
 			<button id="btn-objets">Objets</button>
@@ -165,19 +166,21 @@
 					<figcaption>Hotel First Arte - New Delhi</figcaption>
 				</figure> -->
 				</div>
-				<form id="ajout-projets" method="post" url="/upload-picture" enctype="multipart/form-data" style="display: none;">
+				<form id="ajout-projets" method="post" url="/upload-picture" enctype="multipart/form-data"
+					style="display: none;">
 					<div id="ajouter-image">
 						<i class="fa-regular fa-image"></i>
-							<div id="parent-div">
-								<button id="ajout-photo">+ Ajouter photo</button>
-								<input type="file" accept=".jpg, .jpeg, .png" id="file" onChange="previewPicture()" required/>	
-								<img src="" id="img-preview" alt="Prévisualisation de l'image…">
-								<label for="file" id="file-preview">
-							</div>
+						<div id="parent-div">
+							<button id="ajout-photo">+ Ajouter photo</button>
+							<input type="file" name="file" id="file" onchange="previewFile();"
+								accept=".jpg, .jpeg, .png" required />
+							<img src="" id="img-preview" alt="Prévisualisation de l'image…">
+							<label for="file" id="file-preview">
+						</div>
 						<div id="legende-photo">png, jpg : 4mo max</div>
 					</div>
 					<h4>Titre</h4>
-					<input id="ajouter-titre"></input>
+					<input id="ajouter-titre" required></input>
 					<h4>Catégorie</h4>
 					<select id="choisir-categorie" name="Catégorie">
 						<option>Objets</option>
@@ -185,7 +188,7 @@
 						<option>Hotels et restaurants</option>
 					</select>
 					<div id="conteneur-valider">
-						<input type="submit" id="valider" value="Valider">
+						<input type="submit" id="valider" value="Valider" disabled="disabled">
 					</div>
 				</form>
 				<div id="ajouter-supprimer">

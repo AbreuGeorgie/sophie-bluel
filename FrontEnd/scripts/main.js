@@ -45,7 +45,6 @@ boutonLogin.addEventListener("click", function (e) {
         boutonLogin.innerHTML = "login";
         document.getElementById("mode-edition").style.display = null;
         document.getElementById("modifier").style.display = null;
-        
     }
 });
 

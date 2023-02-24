@@ -1,10 +1,10 @@
 // import des données pour reccupérer les projets de l'architecte via l'API
 export async function callApiWorks() {
-	const response = await fetch('http://localhost:5678/api/works');
-	if (!response.ok) {
-		throw new Error(`HTTP error! status: ${response.status}`);
-	}
-	const data = await response.json();
+    const response = await fetch('http://localhost:5678/api/works');
+    if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
     console.log("Les donnees", data)
     return (data);
 }

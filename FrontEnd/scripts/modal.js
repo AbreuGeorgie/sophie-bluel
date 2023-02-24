@@ -179,16 +179,21 @@ boutonRetour.addEventListener("click", retourPageAccueilModale);
 
 
 
-/* //selectionner l'image du nouveau projet
-const photoSelector = document.getElementById('ajout-photo')
+//selectionner l'image du nouveau projet
+const photoSelector = document.getElementById('file')
 photoSelector.addEventListener('change', event => {
+    console.log(event)
     const files = event.target.files
-
-    console.log(files)
-}) */
+    const imgPreview = document.getElementById('img-preview')
+    imgPreview.src = URL.createObjectURL(event.target.files[0]);
+    imgPreview.onload = function() {
+      URL.revokeObjectURL(imgPreview.src) // free memory
+    }
+    console.log("change", files)
+})
 
 function previewFile() {
-    const preview = document.querySelector('#img-preview');
+    /* const preview = document.querySelector('#img-preview');
     const file = document.querySelector('input[type=file]').files[0];
     const reader = new FileReader();
 
@@ -202,7 +207,7 @@ function previewFile() {
     if (file) {
         reader.readAsDataURL(file);
         console.log("c'est bon")
-    }
+    } */
 }
 
 
@@ -210,12 +215,13 @@ function previewFile() {
 //------------------ Ajouter un projet --------------------------
 
 async function callApiAjouterFigure(work) {
+    console.log(work)
     let token = window.sessionStorage.getItem("token")
     console.log("tokenAjouterProjet", token)
     const response = await fetch('http://localhost:5678/api/works', {
         method: 'POST',
         headers: {
-            'accept': 'application/json',
+            // 'accept': 'application/json',
             'Authorization': `bearer ${token}`,
             'Content-Type': 'multipart/form-data'
         },
@@ -252,6 +258,9 @@ function formAjouterProjets() {
 
     formAjoutProjets.addEventListener("submit", function (event) {
         event.preventDefault();
+        console.log(event)
+        let formData = new FormData(this);
+        // formData.append('', fileField.files[0]);
         //creation objet work
         let work = {
             image: (event.target.querySelector("#file").value),
@@ -260,7 +269,7 @@ function formAjouterProjets() {
         };
 
         //appel à l'api
-        callApiAjouterFigure(work)
+        /* callApiAjouterFigure(work)
             .then((res) => {
                 console.log(res)
                 if (!res.ok) { //si la connexion ne se fait pas
@@ -273,7 +282,7 @@ function formAjouterProjets() {
                 } else {
                     retourPageAccueilModale;
                 }
-            });
+            }); */
 
     });
 

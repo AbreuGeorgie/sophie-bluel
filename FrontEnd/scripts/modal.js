@@ -47,6 +47,7 @@ function genererFigureModal(work) {
                 .then(res => console.log(res))
         }
     })
+    // supprimer les trvaux dynamiquement
 
 };
 
@@ -180,15 +181,16 @@ boutonRetour.addEventListener("click", retourPageAccueilModale);
 
 
 //selectionner l'image du nouveau projet
-const photoSelector = document.getElementById('file')
+const photoSelector = document.getElementById('file');
 photoSelector.addEventListener('change', event => {
     console.log(event)
     const files = event.target.files
     const imgPreview = document.getElementById('img-preview')
     imgPreview.src = URL.createObjectURL(event.target.files[0]);
-    imgPreview.onload = function() {
-      URL.revokeObjectURL(imgPreview.src) // free memory
+    imgPreview.onload = function () {
+        URL.revokeObjectURL(imgPreview.src) // free memory
     }
+
     console.log("change", files)
 })
 
@@ -214,8 +216,8 @@ function previewFile() {
 
 //------------------ Ajouter un projet --------------------------
 
-async function callApiAjouterFigure(work) {
-    console.log(work)
+async function callApiAjouterFigure(workForm) {
+    console.log(workForm)
     let token = window.sessionStorage.getItem("token")
     console.log("tokenAjouterProjet", token)
     const response = await fetch('http://localhost:5678/api/works', {
@@ -223,9 +225,9 @@ async function callApiAjouterFigure(work) {
         headers: {
             // 'accept': 'application/json',
             'Authorization': `bearer ${token}`,
-            'Content-Type': 'multipart/form-data'
+            // 'Content-Type': 'multipart/form-data'
         },
-        body: JSON.stringify(work)
+        body: workForm
     })
     return response
 };
@@ -258,18 +260,20 @@ function formAjouterProjets() {
 
     formAjoutProjets.addEventListener("submit", function (event) {
         event.preventDefault();
-        console.log(event)
-        let formData = new FormData(this);
-        // formData.append('', fileField.files[0]);
-        //creation objet work
-        let work = {
-            image: (event.target.querySelector("#file").value),
-            title: (event.target.querySelector("#ajouter-titre").value),
-            category: (event.target.querySelector("#choisir-categorie").value)
-        };
+        console.log("ici", event.target.querySelector("#choisir-categorie").value)
+
+        const title = event.target.querySelector("#ajouter-titre").value
+        const fileField = document.querySelector("input[type='file']");
+
+        const workForm = new FormData();
+        workForm.append("image", fileField.files[0]);
+        workForm.append("title", title);
+        workForm.append("category", parseInt(
+            event.target.querySelector("#choisir-categorie").value
+        ));
 
         //appel à l'api
-        /* callApiAjouterFigure(work)
+        callApiAjouterFigure(workForm)
             .then((res) => {
                 console.log(res)
                 if (!res.ok) { //si la connexion ne se fait pas
@@ -280,15 +284,17 @@ function formAjouterProjets() {
                         alert(error);
                     });
                 } else {
-                    retourPageAccueilModale;
+                    //retourPageAccueilModale;
                 }
-            }); */
-
+            });
+        event.preventDefault();
     });
 
 }
 
 formAjouterProjets();
+
+
 
 //--------------------------------------------------------------------
 

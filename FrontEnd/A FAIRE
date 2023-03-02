@@ -1,8 +1,8 @@
 
+supprimer les trvaux dynamiquement
 
-previewPicture is not defined
+ajouter les travaux dynamiquement
 
-pourquoi le logo poubelle ne se met qu'une fois alors qu'il 
-devrait etre appelé a chaque figure
+redimensionner l'image img-preview
 
-fetch delete erreur401 non autorisé
+ajouter projet avec formData

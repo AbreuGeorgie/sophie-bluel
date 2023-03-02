@@ -615,3 +615,8 @@ h4 {
 	border: none;
 	border-radius: 3px;
 }
+
+#img-preview{
+	max-width: 200px;
+    max-height: 250px;
+}

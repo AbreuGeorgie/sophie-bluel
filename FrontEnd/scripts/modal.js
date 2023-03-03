@@ -43,7 +43,6 @@ function genererFigureModal(work) {
                     'Content-Type': 'application/json'
                 },
             })
-                .then(res => res.json()) // or res.json()
                 .then(res => console.log(res))
         }
     })

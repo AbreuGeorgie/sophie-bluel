@@ -262,7 +262,7 @@ function formAjouterProjets() {
             event.target.querySelector("#choisir-categorie").value
         ));
 
-        //appel à l'api
+        // appel à l'api
         callApiAjouterFigure(workForm)
             .then((res) => {
                 console.log(res)
@@ -275,7 +275,6 @@ function formAjouterProjets() {
                     });
                 }
             });
-        event.preventDefault();
     });
 
 }

@@ -13,6 +13,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         boutonLogin.innerHTML = "logout";
         document.getElementById("mode-edition").style.display = "flex";
         document.getElementById("modifier").style.display = "block";
+        document.getElementById("modifier-photo").style.display = "block";
     }
 
     //fonction qui va permettre de publier les changements dans la modale
@@ -45,6 +46,7 @@ boutonLogin.addEventListener("click", function (e) {
         boutonLogin.innerHTML = "login";
         document.getElementById("mode-edition").style.display = null;
         document.getElementById("modifier").style.display = null;
+        document.getElementById("modifier-photo").style.display = null;
     }
 });
 

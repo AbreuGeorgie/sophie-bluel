@@ -185,32 +185,22 @@ const photoSelector = document.getElementById('file');
 photoSelector.addEventListener('change', event => {
     console.log(event)
     const files = event.target.files
-    const imgPreview = document.getElementById('img-preview')
+    const imgPreview = document.getElementById('img-preview');
+    const textAjouterPhoto = document.getElementById("ajout-photo");
+    const pngJpg = document.getElementById("legende-photo");
+    const logoImage = document.getElementById("logo-image");
+    textAjouterPhoto.style.display = "none";
+    pngJpg.style.display = "none";
+    logoImage.style.display = "none";
+    imgPreview.style.display = "block";
     imgPreview.src = URL.createObjectURL(event.target.files[0]);
     imgPreview.onload = function () {
         URL.revokeObjectURL(imgPreview.src) // free memory
     }
 
+
     console.log("change", files)
 })
-
-function previewFile() {
-    /* const preview = document.querySelector('#img-preview');
-    const file = document.querySelector('input[type=file]').files[0];
-    const reader = new FileReader();
-
-    reader.addEventListener("load", () => {
-        console.log("dacdac")
-        // on convertit l'image en une chaîne de caractères
-        preview.src = reader.result;
-        console.log("ok", result)
-    }, false);
-
-    if (file) {
-        reader.readAsDataURL(file);
-        console.log("c'est bon")
-    } */
-}
 
 
 
@@ -283,8 +273,6 @@ function formAjouterProjets() {
                         console.log(error);
                         alert(error);
                     });
-                } else {
-                    //retourPageAccueilModale;
                 }
             });
         event.preventDefault();

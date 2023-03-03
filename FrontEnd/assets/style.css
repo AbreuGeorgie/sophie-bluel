@@ -410,15 +410,25 @@ footer nav ul {
 	padding-right: 2em;
 }
 
-#modifier {
-	position: relative;
-	top: -6.2em;
-	left: 40em;
+#modifier, #modifier-photo {
 	font-family: 'Work Sans';
 	font-size: 13px;
 	background: none;
 	border: none;
 	display: none;
+}
+
+#modifier {
+	position: relative;
+	top: -6.2em;
+	left: 53em;
+}
+
+#modifier-photo{
+    margin: auto;
+	margin-top: 10px;
+    width: 80%;
+    text-align: left;
 }
 
 .modal {
@@ -523,15 +533,17 @@ footer nav ul {
 }
 
 #ajouter-image {
-	padding: 30px 100px;
 	background-color: #E8F1F6;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
+    min-height: 200px;
+	max-height: 200px;
 }
 
 .fa-image:before {
-	font-size: 60px;
+	font-size: 75px;
 	color: #B9C5CC;
 }
 
@@ -617,6 +629,7 @@ h4 {
 }
 
 #img-preview{
-	max-width: 200px;
-    max-height: 250px;
+	display: none;
+	max-width: 150px;
+    object-fit: cover;
 }

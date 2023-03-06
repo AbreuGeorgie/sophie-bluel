@@ -465,9 +465,8 @@ footer nav ul {
 }
 
 .gallery-modal {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
+	display: grid;
+    GRID-TEMPLATE-COLUMNS: 1fr 1fr 1fr 1fr 1fr;
 	height: 412px;
 	width: 70%;
 }

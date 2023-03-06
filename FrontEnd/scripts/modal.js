@@ -2,6 +2,7 @@ function genererFigureModal(work) {
 
     const projetArchitecte = document.createElement("figure");
     const gallerieModal = document.querySelector(".gallery-modal");
+    const gallerie = document.querySelector(".gallery");
 
     //création des images et nom des projets
     const imageProjet = document.createElement("img");
@@ -31,11 +32,14 @@ function genererFigureModal(work) {
 
     //supprimer des éléments de la gallerie
     boutonPoubelle.addEventListener("click", function (e) {
-        console.log(e.target.parentElement)
-        if ("workId" in e.target.parentElement.dataset === true) {
-            const id = e.target.parentElement.dataset.workId
+        console.log("a", e.target.parentElement)
+        console.log("b", e.target.parentElement.dataset)
+        console.log("c", e.target.parentElement.dataset.workId)
+
+        const elementParent = e.target.parentElement;
+        if ("workId" in elementParent.dataset === true) {
+            const id = elementParent.dataset.workId
             let token = window.sessionStorage.getItem("token")
-            console.log("token", token)
             fetch('http://localhost:5678/api/works/' + id, {
                 method: 'DELETE',
                 headers: {
@@ -45,6 +49,8 @@ function genererFigureModal(work) {
             })
                 .then(res => console.log(res))
         }
+        console.log("d", elementParent)
+        gallerieModal.removeChild(elementParent.parentElement);
     })
     // supprimer les trvaux dynamiquement
 
@@ -60,13 +66,12 @@ let focusables = []
 //focntion qui va permettre d'ouvrir la fenetre modale
 export const openModal = function (e, figures) {
     figures.forEach((figure) => {
-        genererFigureModal(figure); // pour chaque projet => generer projet
+        genererFigureModal(figure);
     });
-    console.log("mes figures dans modal", figures)
-    e.preventDefault()
+    e.preventDefault();
     modal = document.querySelector(e.target.getAttribute("href")) // cible l'id modal1
     const boutonClose = document.querySelector(".js-close-modal")
-    boutonClose.innerHTML = "x" //remplace par une croix
+    boutonClose.innerHTML = "x"
     focusables = Array.from(modal.querySelectorAll(focusableSelector)) //Array.from pour avoir les éléments focusables dans un tableau
     focusables[0].focus() //permet de selectionner le premier élément focusable avec tab
     modal.style.display = null // enlève de display none attribué dans le HTML
@@ -115,14 +120,11 @@ const focusInModal = function (e) {
         index = focusables.length - 1
     }
     focusables[index].focus();
-
-    console.log(index)
 }
 
 //focntion qui va permettre de stopper la propagation 
 const stopPropagation = function (e) {
     e.stopPropagation()
-    console.log("stop propagation")
 }
 
 //fonction qui écoute les cliques du clavier et permet de fermer la modal ou selectionner un element focusable avec tab
@@ -158,10 +160,10 @@ const ajouterDesProjets = function ajouterDesProjets() {
     boutonValider.style.display = "block";
 };
 
+
 //retourner a la page d'accueil modale
 const retourPageAccueilModale = function retourPageAccueilModale() {
     titreModal.innerText = "Galerie photo";
-
     document.querySelector(".gallery-modal").style.display = "flex";
     ajoutProjet.style.display = "none";
     boutonRetour.style.display = "none";
@@ -182,7 +184,6 @@ boutonRetour.addEventListener("click", retourPageAccueilModale);
 //selectionner l'image du nouveau projet
 const photoSelector = document.getElementById('file');
 photoSelector.addEventListener('change', event => {
-    console.log(event)
     const files = event.target.files
     const imgPreview = document.getElementById('img-preview');
     const textAjouterPhoto = document.getElementById("ajout-photo");
@@ -196,9 +197,6 @@ photoSelector.addEventListener('change', event => {
     imgPreview.onload = function () {
         URL.revokeObjectURL(imgPreview.src) // free memory
     }
-
-
-    console.log("change", files)
 })
 
 
@@ -261,6 +259,12 @@ function formAjouterProjets() {
             event.target.querySelector("#choisir-categorie").value
         ));
 
+        /*         const afficherNouveauProjet = document.createElement("FormData");
+                const gallerieModal = document.querySelector(".gallery-modal");
+                const gallerie = document.querySelector(".gallery");
+                gallerie.appendChild(afficherNouveauProjet);
+                gallerieModal.appendChild(afficherNouveauProjet); */
+
         // appel à l'api
         callApiAjouterFigure(workForm)
             .then((res) => {
@@ -274,8 +278,8 @@ function formAjouterProjets() {
                     });
                 }
             });
+        retourPageAccueilModale();
     });
-
 }
 
 formAjouterProjets();

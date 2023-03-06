@@ -16,25 +16,16 @@ window.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById("modifier-photo").style.display = "block";
     }
 
-    //fonction qui va permettre de publier les changements dans la modale
-    const boutonPublier = document.getElementById("publier-changements");
-    boutonPublier.addEventListener("click", function () {
-        /*...*/
-    });
-
     callApiWorks().then((figures) => {
         figures.forEach((figure) => {
             genererFigure(figure); // pour chaque projet => generer projet
         });
         genererFiltres();
         //fonction qui va appeler a l'ouverture de la modale lors du clique sur le bouton 
-        document.querySelectorAll(".js-modal").forEach(a => {
-            a.addEventListener("click", (e) => {
+        document.querySelector(".js-modal").addEventListener("click", (e) => {
                 openModal(e, figures)
+                console.log("az", e, "aa", figures)
             })
-        })
-
-    });
 });
 
 const boutonLogin = document.querySelector(".login-logout"); //reccuperation du bouton Login
@@ -49,5 +40,4 @@ boutonLogin.addEventListener("click", function (e) {
         document.getElementById("modifier-photo").style.display = null;
     }
 });
-
-
+});

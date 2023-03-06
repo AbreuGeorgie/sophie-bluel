@@ -1,7 +1,7 @@
 //import des fonctions pour reccuperer et afficher les projets de l'architecte
 import { callApiWorks, genererFigure } from "./work.js";
 import { genererFiltres } from "./filtres.js";
-import { openModal, closeModal } from "./modal.js";
+import { openModal } from "./modal.js";
 
 //Affichage des éléments une fois la page chargée
 window.addEventListener('DOMContentLoaded', (event) => {
@@ -37,7 +37,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 
-    //fonction qui va appeler a l'ouverture de la modale lors du clique sur le bouton 
+    //fonction qui va appeler a l'ouverture de la modale lors du clique sur le bouton modifier
     document.querySelector(".js-modal").addEventListener("click", (e) => {
         callApiWorks().then((figures) => {
             openModal(e, figures)

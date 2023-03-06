@@ -115,7 +115,7 @@ export const openModal = function (e, figures) {
 
 /* --------------------- FERMETURE MODALE ---------------------------- */
 
-export const closeModal = function (e) {
+const closeModal = function (e) {
     if (modal === null) return  //si la modale s'affiche
     e.preventDefault();
     document.querySelector(".gallery-modal").innerHTML = "";
@@ -125,14 +125,19 @@ export const closeModal = function (e) {
     modal.removeEventListener("click", closeModal); // on retire l'écoute du clique 
     modal.querySelector(".js-close-modal").removeEventListener("click", closeModal); //on retire la fermeture de la modale
     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation); // on retire le stop de propagation pour la fermeture
-    retourPageAccueilModale();
     modal = null; // on remet la valeur de la modal a null
-/*     genererFigure() */
+/*     document.querySelector(".gallery").innerHTML = "";
+    callApiWorks().then((figures) => {
+        figures.forEach((figure) => {
+            genererFigure(figure); // pour chaque projet => generer projet
+        }); */
+    retourPageAccueilModale();
+/*     }); */
 
 }
 
 /* -------------------------STOP PROPAGATION------------------------ */
- 
+
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
@@ -141,35 +146,41 @@ const stopPropagation = function (e) {
 /* ------ PASSER DE LA "PREMIERE" PAGE MODALE A LA "DEUXIEME" ------- */
 
 //constante de la page modale ajouter projets
-const boutonAjouterProjet = document.querySelector("#ajouter-projets");
+const boutonAjouterProjet = document.getElementById("ajouter-projets");
 const boutonRetour = document.querySelector(".fleche-retour");
 const ajouterSupprimerProjets = document.getElementById("ajouter-supprimer");
 const boutonValider = document.getElementById("valider");
 const ajoutProjet = document.getElementById("ajout-projets");
-const titreModal = document.querySelector("#titre-modal");
+const titreModal = document.getElementById("titre-modal");
+const gallerieModal = document.querySelector(".gallery-modal")
+const titre = document.getElementById("ajouter-titre");
+const imgPreview = document.getElementById('img-preview');
 
 //fonction pour passer de la première à la deuxième page
-const ajouterDesProjets = function ajouterDesProjets() {
+const ajouterDesProjets = function () {
     titreModal.innerText = "Ajout photo";
 
-    document.querySelector(".gallery-modal").style.display = "none";
+    gallerieModal.style.display = "none";
     ajoutProjet.style.display = "block";
     boutonRetour.style.display = "block";
-    document.getElementById("ajouter-projets").style.display = "none";
+    boutonAjouterProjet.style.display = "none";
     ajouterSupprimerProjets.style.display = "none";
     boutonValider.style.display = "block";
 };
 
 
 /* ------ RETOURNER DE LA "DEUXIEME" PAGE MODALE A LA "PREMIERE" ------- */
-const retourPageAccueilModale = function retourPageAccueilModale() {
+const retourPageAccueilModale = function () {
     titreModal.innerText = "Galerie photo";
-    document.querySelector(".gallery-modal").style.display = "grid";
+    gallerieModal.style.display = "grid";
     ajoutProjet.style.display = "none";
     boutonRetour.style.display = "none";
     ajouterSupprimerProjets.style.display = "flex";
     boutonAjouterProjet.style.display = "block";
     boutonValider.style.display = "none";
+    titre.value = "";
+    reinitialiserAjouterPhoto()
+    console.log(imgPreview)
 };
 
 boutonAjouterProjet.addEventListener("click", ajouterDesProjets);
@@ -178,12 +189,13 @@ boutonRetour.addEventListener("click", retourPageAccueilModale);
 /* -------------SELECTIONNER L'IMAGE DU NOUVEAU PROJET--------------- */
 
 const photoSelector = document.getElementById('file');
+const textAjouterPhoto = document.getElementById("ajout-photo");
+const pngJpg = document.getElementById("legende-photo");
+const logoImage = document.getElementById("logo-image");
+
 photoSelector.addEventListener('change', event => {
-    const files = event.target.files
-    const imgPreview = document.getElementById('img-preview');
-    const textAjouterPhoto = document.getElementById("ajout-photo");
-    const pngJpg = document.getElementById("legende-photo");
-    const logoImage = document.getElementById("logo-image");
+    /* const files = event.target.files  */
+/*     const imgPreview = document.getElementById('img-preview'); */
     textAjouterPhoto.style.display = "none";
     pngJpg.style.display = "none";
     logoImage.style.display = "none";
@@ -193,6 +205,14 @@ photoSelector.addEventListener('change', event => {
         URL.revokeObjectURL(imgPreview.src) // free memory
     }
 })
+
+const reinitialiserAjouterPhoto = function (){
+    textAjouterPhoto.style.display = null;
+    pngJpg.style.display = null;
+    logoImage.style.display = null;
+    imgPreview.style.display = null;
+    imgPreview.src = URL.revokeObjectURL
+}
 
 
 /* ------------------ AJOUTER LE NOUVEAU PROJET -------------------------- */
@@ -213,7 +233,7 @@ async function callApiAjouterFigure(workForm) {
     return response
 };
 //activation/desactivation bouton valider
-function boutonEnvoyerForm() {
+const boutonEnvoyerForm = function () {
 
     const photo = document.getElementById("file");
     const titre = document.getElementById("ajouter-titre");
@@ -237,7 +257,7 @@ function boutonEnvoyerForm() {
 boutonEnvoyerForm()
 
 // envoi du formulaire avec method POST
-function formAjouterProjets() {
+const ajouterProjet = function () {
     const formAjoutProjets = document.querySelector("#ajout-projets"); //reccuperation du formulaire
 
     formAjoutProjets.addEventListener("submit", function (event) {
@@ -282,9 +302,10 @@ function formAjouterProjets() {
             });
         retourPageAccueilModale();
     }
-    )}
+    )
+}
 
-formAjouterProjets();
+ajouterProjet();
 
 
 

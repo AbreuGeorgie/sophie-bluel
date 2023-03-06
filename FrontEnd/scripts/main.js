@@ -21,23 +21,28 @@ window.addEventListener('DOMContentLoaded', (event) => {
             genererFigure(figure); // pour chaque projet => generer projet
         });
         genererFiltres();
-        //fonction qui va appeler a l'ouverture de la modale lors du clique sur le bouton 
-        document.querySelector(".js-modal").addEventListener("click", (e) => {
-                openModal(e, figures)
-                console.log("az", e, "aa", figures)
-            })
-});
+        
+    });
 
-const boutonLogin = document.querySelector(".login-logout"); //reccuperation du bouton Login
-//deconnexion
-boutonLogin.addEventListener("click", function (e) {
-    if (window.sessionStorage.getItem("token") != null) {
-        e.preventDefault() // ne pas rediriger
-        window.sessionStorage.removeItem("token"); //supprime le token
-        boutonLogin.innerHTML = "login";
-        document.getElementById("mode-edition").style.display = null;
-        document.getElementById("modifier").style.display = null;
-        document.getElementById("modifier-photo").style.display = null;
-    }
-});
+    const boutonLogin = document.querySelector(".login-logout"); //reccuperation du bouton Login
+    //deconnexion
+    boutonLogin.addEventListener("click", function (e) {
+        if (window.sessionStorage.getItem("token") != null) {
+            e.preventDefault() // ne pas rediriger
+            window.sessionStorage.removeItem("token"); //supprime le token
+            boutonLogin.innerHTML = "login";
+            document.getElementById("mode-edition").style.display = null;
+            document.getElementById("modifier").style.display = null;
+            document.getElementById("modifier-photo").style.display = null;
+        }
+    });
+
+    //fonction qui va appeler a l'ouverture de la modale lors du clique sur le bouton 
+    document.querySelector(".js-modal").addEventListener("click", (e) => {
+        callApiWorks().then((figures) => {
+            openModal(e, figures)
+            console.log("az", e, "aa", figures)
+        });
+    })
+
 });

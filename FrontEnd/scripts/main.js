@@ -14,7 +14,7 @@ window.addEventListener('DOMContentLoaded', (event) => {
         document.getElementById("mode-edition").style.display = "flex";
         document.getElementById("modifier").style.display = "block";
         document.getElementById("modifier-photo").style.display = "block";
-    }
+    };
 
     callApiWorks().then((figures) => {
         figures.forEach((figure) => {

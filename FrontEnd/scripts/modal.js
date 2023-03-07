@@ -1,4 +1,9 @@
-import { callApiWorks, genererFigure } from "./work.js";
+import { genererFigure } from "./work.js";
+
+let modal = null;
+let globalFigures = []
+
+// const found = globalFigures.find(id => id === 10);
 
 function genererFigureModal(work) {
 
@@ -33,9 +38,10 @@ function genererFigureModal(work) {
 
     //supprimer des éléments de la gallerie
     boutonPoubelle.addEventListener("click", function (e) {
-        console.log("a", e.target.parentElement)
-        console.log("b", e.target.parentElement.dataset)
-        console.log("c", e.target.parentElement.dataset.workId)
+
+        // console.log("a", e.target.parentElement)
+        // console.log("b", e.target.parentElement.dataset)
+        // console.log("c", e.target.parentElement.dataset.workId)
 
         const elementParent = e.target.parentElement;
         if ("workId" in elementParent.dataset === true) {
@@ -48,11 +54,22 @@ function genererFigureModal(work) {
                     'Content-Type': 'application/json'
                 },
             })
-                .then(res => console.log(res))
+                .then(res => {
+                    const workSupprime = globalFigures.filter((work, index, arr) => {
+                        if (work.id == id) {
+                            arr.splice(index, 1);
+                            return true;
+                        }
+                        return false;
+                    })
+                    console.log("Work supprimé ", workSupprime)
+                    console.log("Tous les nouveaux Work", globalFigures)
+                })
         }
-        console.log("d", elementParent)
+        // console.log("d", elementParent)
         gallerieModal.removeChild(elementParent.parentElement);
     })
+    
 };
 
 //---------------------------------- FOCUSABLE -------------------------//
@@ -91,8 +108,6 @@ window.addEventListener("keydown", function (e) {
 
 //--------------------- OUVERTURE MODALE ----------------------------//
 
-let modal = null;
-let globalFigures = null
 
 export const openModal = function (e, figures) {
     globalFigures = figures
@@ -126,14 +141,13 @@ const closeModal = function (e) {
     modal.querySelector(".js-close-modal").removeEventListener("click", closeModal); //on retire la fermeture de la modale
     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation); // on retire le stop de propagation pour la fermeture
     modal = null; // on remet la valeur de la modal a null
-/*     document.querySelector(".gallery").innerHTML = "";
-    callApiWorks().then((figures) => {
-        figures.forEach((figure) => {
-            genererFigure(figure); // pour chaque projet => generer projet
-        }); */
     retourPageAccueilModale();
-/*     }); */
-
+    console.log("ici", globalFigures)
+    const gallerie = document.querySelector(".gallery");
+    gallerie.innerHTML = ""
+    globalFigures.forEach((figure) => {
+        genererFigure(figure); // pour chaque projet => generer projet
+    });
 }
 
 /* -------------------------STOP PROPAGATION------------------------ */
@@ -180,7 +194,6 @@ const retourPageAccueilModale = function () {
     boutonValider.style.display = "none";
     titre.value = "";
     reinitialiserAjouterPhoto()
-    console.log(imgPreview)
 };
 
 boutonAjouterProjet.addEventListener("click", ajouterDesProjets);
@@ -195,7 +208,7 @@ const logoImage = document.getElementById("logo-image");
 
 photoSelector.addEventListener('change', event => {
     /* const files = event.target.files  */
-/*     const imgPreview = document.getElementById('img-preview'); */
+    /*     const imgPreview = document.getElementById('img-preview'); */
     textAjouterPhoto.style.display = "none";
     pngJpg.style.display = "none";
     logoImage.style.display = "none";
@@ -206,12 +219,12 @@ photoSelector.addEventListener('change', event => {
     }
 })
 
-const reinitialiserAjouterPhoto = function (){
+const reinitialiserAjouterPhoto = function () {
     textAjouterPhoto.style.display = null;
     pngJpg.style.display = null;
     logoImage.style.display = null;
     imgPreview.style.display = null;
-    imgPreview.src = URL.revokeObjectURL
+    imgPreview.src = ""
 }
 
 
@@ -224,14 +237,14 @@ async function callApiAjouterFigure(workForm) {
     const response = await fetch('http://localhost:5678/api/works', {
         method: 'POST',
         headers: {
-            // 'accept': 'application/json',
-            'Authorization': `bearer ${token}`,
-            // 'Content-Type': 'multipart/form-data'
+            'Authorization': `bearer ${token}`
         },
         body: workForm
     })
     return response
 };
+
+
 //activation/desactivation bouton valider
 const boutonEnvoyerForm = function () {
 
@@ -278,19 +291,16 @@ const ajouterProjet = function () {
 
         const imageProjet = document.createElement("img");
         imageProjet.crossOrigin = "anonymous";
-        imageProjet.src = image.files[0];
-        imageProjet.alt = title;
+        // imageProjet.src = image.files[0];
+        // imageProjet.alt = title;
         const nomProjet = document.createElement("figcaption");
         nomProjet.innerText = "editer";
 
-        gallerieModal.appendChild(afficherNouveauProjet);
-        afficherNouveauProjet.appendChild(imageProjet)
-        afficherNouveauProjet.appendChild(nomProjet)
+
 
         // appel à l'api
         callApiAjouterFigure(workForm)
             .then((res) => {
-                console.log(res)
                 if (!res.ok) { //si la connexion ne se fait pas
                     res.json().then((body) => {
                         throw body.message
@@ -299,10 +309,18 @@ const ajouterProjet = function () {
                         alert(error);
                     });
                 }
+                res.json().then((body) => {
+                    console.log(body)
+                    globalFigures.push(body)
+                    imageProjet.src = body.imageUrl
+                    imageProjet.alt = title;
+                    afficherNouveauProjet.appendChild(imageProjet)
+                    afficherNouveauProjet.appendChild(nomProjet)
+                    gallerieModal.appendChild(afficherNouveauProjet);
+                    retourPageAccueilModale();
+                })
             });
-        retourPageAccueilModale();
-    }
-    )
+    })
 }
 
 ajouterProjet();

@@ -1,33 +1,62 @@
-## CREER UNE PAGE WEB DYNAMIQUE AVEC JAVASCRIPT 
+# CREER UNE PAGE WEB DYNAMIQUE AVEC JAVASCRIPT 
 
-# FrontEnd API - Sophie Bluel
+## Introduction
 
-Ce repo contient le code frontend de l'architecte Sophie Bluel. 
-3 fichiers un index.js work importé sur index.js
+Ce repo contient le code frontend du site de l'architecte Sophie Bluel. 
 
 ## Lancement du frontend
 
 Après avoir récupéré le REPO, suivre le README du backend.
 
+Telecharger l'extension Live Server sur Visual Studio Code.
 
-<!-- 
-Compte de test pour Sophie Bluel
-
+Le dossier caché .vscode contient la configuration du projet pour live server, si vous utilisez vos configurations personnalisées, veillez à utiliser ce paramètre :
+```json
+{
+    "liveServer.settings.port": 5501,
+    "liveServer.settings.root": "/FrontEnd"
+}
 ```
-email: sophie.bluel@test.tld
 
-password: S0phie 
-```
-Lien pour voir la
-[documentation Swagger](http://localhost:5678/api-docs/)
+Lancer le fichier index.html avec Live Server.
 
-Pour lire la documentation, utiliser Chrome ou Firefox -->
+## Détail des fichiers
 
+- Les différents langages utilisés :
 
-Telecharger l'extension Live Server sur Visual Studio Code
+    - HTML5
+    - CSS3
+    - JAVASCRIPT
 
-Aller dans Live Server > Settings : Root
-Cliquer sur "Edit in settings.json"
-Modifier la ligne "liveServer.settings.root": "" par "liveServer.settings.root": "/FrontEnd"
+- Fichiers HTML:
+    Le projet contient 2 fichiers HTML.
+    Le fichier index.html qui contient le code HTML de la page d'accueil du site et le fichier login.html où j'y ai mis le code HTML de la page de connection.
 
-Lancer le fichier index.html avec Go Live
+- Fichier CSS:
+    Il y a 1 fichier CSS style.css qui contient tout le CSS du projet
+
+- Fichiers JAVASCRIPT:
+
+    Il y a 5 fichiers Javascript:
+
+    - 1 fichier principal main.js appelé directement par le fichier index.html, dans lequel j'y ai importé les fonctions qui concerne la page d'accueil 
+
+    -   Le fichier work.js qui contient l'appel à l'api pour récupérer les works du backend et la fonction pour les générer sur la page, ses fonctions sont appelées dans tous les fichiers ratachés à la page d'accueil (tous sauf login.js).
+
+    - Le fichier filtres.js qui contient la fonction pour mettre en place les filtres.
+
+    - Le fichier modale.js qui contient les fonctions qui concerne la modale.
+
+    - Le fichier login.js est indépendant des autres et est appelé par le fichier login.html.
+
+## Sources
+
+Pour ce projet, je me suis aidée : 
+* des cours sur Javascript d'OpenClassRoom
+* du webinaire "Utilisez JavaScript pour réaliser un site dynamique" d'OpenClassRoom
+* du guide des étapes clés
+* du tutoriel "Documenter son API avec OpenAPI (Swagger)" de Grafikart
+* du tutoriel "Fenêtre modale" de Grafikart également
+* du site https://developer.mozilla.org notamment les pages pages qui concernent fetch, createElement, l'objet Set, l'objet formData
+* du site https://fr.javascript.info, à la page qui explique comment utiliser la requête POST avec fetch
+

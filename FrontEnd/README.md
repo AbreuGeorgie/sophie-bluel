@@ -60,3 +60,13 @@ Pour ce projet, je me suis aidée :
 * du site https://developer.mozilla.org notamment les pages pages qui concernent fetch, createElement, l'objet Set, l'objet formData
 * du site https://fr.javascript.info, à la page qui explique comment utiliser la requête POST avec fetch
 
+## Tests fonctionnels
+
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]
+- [ ]

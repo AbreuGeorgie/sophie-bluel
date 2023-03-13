@@ -4,45 +4,19 @@ let modal = null;
 let globalFigures = []
 
 // const found = globalFigures.find(id => id === 10);
-
-function genererFigureModal(work) {
-
-    const projetArchitecte = document.createElement("figure");
-    const gallerieModal = document.querySelector(".gallery-modal");
-
-    //création des images et nom des projets
-    const imageProjet = document.createElement("img");
-    imageProjet.crossOrigin = "anonymous";
-    imageProjet.src = work.imageUrl;
-    imageProjet.alt = work.title;
-    const nomProjet = document.createElement("figcaption");
-    nomProjet.innerText = "éditer";
-
+function creePoubelle() {
     //création du logo poubelle dans le boutton
     const boutonPoubelle = document.createElement("button")
     const logoPoubelle = document.createElement("i");
     boutonPoubelle.className = "bouton-poubelle";
     logoPoubelle.className = "fa-solid fa-trash-can";
-    boutonPoubelle.dataset.workId = work.id
 
     //on rattache le logo au bouton poubelle
     boutonPoubelle.appendChild(logoPoubelle);
-
-    // on rattache les projets de l'architecte à la gallerie
-    gallerieModal.appendChild(projetArchitecte);
-
-    //ratachement des images et noms des projets aux projets de l'architecte
-    projetArchitecte.appendChild(imageProjet);
-    projetArchitecte.appendChild(nomProjet);
-    projetArchitecte.appendChild(boutonPoubelle);
-
-    //supprimer des éléments de la gallerie
-    boutonPoubelle.addEventListener("click", function (e) {
-
-        // console.log("a", e.target.parentElement)
-        // console.log("b", e.target.parentElement.dataset)
-        // console.log("c", e.target.parentElement.dataset.workId)
-
+    return boutonPoubelle;
+}
+function supprimerCallback(work) {
+    return function (e) {
         const elementParent = e.target.parentElement;
         if ("workId" in elementParent.dataset === true) {
             const id = elementParent.dataset.workId
@@ -66,9 +40,35 @@ function genererFigureModal(work) {
                     console.log("Tous les nouveaux Work", globalFigures)
                 })
         }
-        // console.log("d", elementParent)
         gallerieModal.removeChild(elementParent.parentElement);
-    })
+    }
+}
+function genererFigureModal(work) {
+
+    const projetArchitecte = document.createElement("figure");
+    const gallerieModal = document.querySelector(".gallery-modal");
+
+    //création des images et nom des projets
+    const imageProjet = document.createElement("img");
+    imageProjet.crossOrigin = "anonymous";
+    imageProjet.src = work.imageUrl;
+    imageProjet.alt = work.title;
+    const nomProjet = document.createElement("figcaption");
+    nomProjet.innerText = "éditer";
+
+    const boutonPoubelle = creePoubelle();
+    boutonPoubelle.dataset.workId = work.id;
+
+    // on rattache les projets de l'architecte à la gallerie
+    gallerieModal.appendChild(projetArchitecte);
+
+    //ratachement des images et noms des projets aux projets de l'architecte
+    projetArchitecte.appendChild(imageProjet);
+    projetArchitecte.appendChild(nomProjet);
+    projetArchitecte.appendChild(boutonPoubelle);
+
+    //supprimer des éléments de la gallerie
+    boutonPoubelle.addEventListener("click", supprimerCallback(work))
     
 };
 
@@ -291,10 +291,9 @@ const ajouterProjet = function () {
 
         const imageProjet = document.createElement("img");
         imageProjet.crossOrigin = "anonymous";
-        // imageProjet.src = image.files[0];
-        // imageProjet.alt = title;
         const nomProjet = document.createElement("figcaption");
         nomProjet.innerText = "editer";
+        
 
 
 
@@ -317,6 +316,13 @@ const ajouterProjet = function () {
                     afficherNouveauProjet.appendChild(imageProjet)
                     afficherNouveauProjet.appendChild(nomProjet)
                     gallerieModal.appendChild(afficherNouveauProjet);
+                    const boutonPoubelle = creePoubelle();
+                    boutonPoubelle.dataset.workId = body.id;
+                    afficherNouveauProjet.appendChild(boutonPoubelle);
+                    
+                    //supprimer des éléments de la gallerie
+                    boutonPoubelle.addEventListener("click", supprimerCallback(body))
+                    
                     retourPageAccueilModale();
                 })
             });

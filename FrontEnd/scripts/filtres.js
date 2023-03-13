@@ -1,44 +1,52 @@
 //import des fonctions pour reccuperer et afficher les projets de l'architecte
 import { callApiWorks, genererFigure } from "./work.js";
 
-export function genererFiltres(){
+export const genererFiltres = function () {
     //appel à l'api pour reccupérer les filtres et création des filtres
-    callApiWorks().then((figures) => {
-        const filtres = new Set([]); //création d'une liste set de filtres
+    callApiWorks().then(function (figures) {
+        //création d'une liste set de filtres
+        const filtres = new Set([]);
 
-        figures.forEach((figure) => {
-            filtres.add(figure.category.name);// pour chaque catégory.name créé un filtre
+        figures.forEach(function (figure) {
+            // pour chaque catégory.name créé un filtre
+            filtres.add(figure.category.name);
         });
 
-        const conteneurFiltres = document.querySelector("#filtres"); //reccuperation du conteneur de filtres
+        //reccuperation du conteneur de filtres
+        const conteneurFiltres = document.querySelector("#filtres");
 
-        const boutonTout = document.createElement("button"); //reccuperation du bouton Tout
+        //création du bouton Tout
+        const boutonTout = document.createElement("button");
         boutonTout.innerText = "Tout";
-        conteneurFiltres.appendChild(boutonTout); //relier le bouton Tout au conteneur de filtres
+        //rattacher le bouton Tout au conteneur de filtres
+        conteneurFiltres.appendChild(boutonTout);
 
-        //lors du clique sur le bouton tout => generer tous les projets
-        boutonTout.addEventListener("click", () => {
-            document.querySelector(".gallery").innerHTML = "";//suppression de l'affichage des projet-
-            figures.forEach(genererFigure);//ajout de tous les projets
+        //lors du clique sur le bouton Tout => generer tous les projets
+        boutonTout.addEventListener("click", function () {
+            //suppression de l'affichage de tous les projets
+            document.querySelector(".gallery").innerHTML = "";
+            //ajout de tous les projets
+            figures.forEach(genererFigure);
         });
+
         //affichage des projets en fonction des filtres
-        filtres.forEach((filtre) => {
+        filtres.forEach(function (filtre) {
+            //pour chaque filtre, création d'un bouton 
             const boutonFiltre = document.createElement("button");
-    
             boutonFiltre.innerText = filtre;
-    
+            //rattacher chaque bouton filtre au conteneur de filtres
             conteneurFiltres.appendChild(boutonFiltre);
-    
-            boutonFiltre.addEventListener("click", () => {
+
+            boutonFiltre.addEventListener("click", function () {
                 const projetsFiltrees = figures.filter((figure) => {
-                    return figure.category.name === filtre;//selectionne les projets correspondant a la categorie cliquée
+                    //selectionne les projets correspondant a la categorie cliquée
+                    return figure.category.name === filtre;
                 });
-                document.querySelector(".gallery").innerHTML = "";//suppression de l'affichage des projets
-                projetsFiltrees.forEach(genererFigure);//ajout des projets filtrés
+                //suppression de l'affichage de tous les projets
+                document.querySelector(".gallery").innerHTML = "";
+                //affichage des projets en fonction du filtre cliqué
+                projetsFiltrees.forEach(genererFigure);
             });
         });
     });
-
-    //affichage des projets en fonction des filtres
-    
 };

@@ -1,12 +1,12 @@
 import { genererFigure } from "./work.js";
 
 let modal = null;
-let globalFigures = []
+//création d'un tableau pour y mettre les figures
+let globalFigures = [];
 
-// const found = globalFigures.find(id => id === 10);
-function creePoubelle() {
+const creePoubelle = function () {
     //création du logo poubelle dans le boutton
-    const boutonPoubelle = document.createElement("button")
+    const boutonPoubelle = document.createElement("button");
     const logoPoubelle = document.createElement("i");
     boutonPoubelle.className = "bouton-poubelle";
     logoPoubelle.className = "fa-solid fa-trash-can";
@@ -15,12 +15,20 @@ function creePoubelle() {
     boutonPoubelle.appendChild(logoPoubelle);
     return boutonPoubelle;
 }
-function supprimerCallback(work) {
+
+const callBackSupprimer = function (work) {
     return function (e) {
-        const elementParent = e.target.parentElement;
-        if ("workId" in elementParent.dataset === true) {
-            const id = elementParent.dataset.workId
-            let token = window.sessionStorage.getItem("token")
+        //sélection de l'élément parent du bouton poubelle
+        const boutonParentLogoPoubelle = e.target.parentElement;
+        console.log("bouton.dataset", boutonParentLogoPoubelle.dataset)
+        console.log("bouton", boutonParentLogoPoubelle)
+        //si workId dans le boutonParentLogoPoubelle existe :
+        if ("workId" in boutonParentLogoPoubelle.dataset === true) {
+            //id = workId du boutonParentLogoPoubelle
+            const id = boutonParentLogoPoubelle.dataset.workId;
+            //reccupération du token stocké dans le sessionsStorage
+            let token = window.sessionStorage.getItem("token");
+            //suppression de la figure via l'api
             fetch('http://localhost:5678/api/works/' + id, {
                 method: 'DELETE',
                 headers: {
@@ -28,27 +36,33 @@ function supprimerCallback(work) {
                     'Content-Type': 'application/json'
                 },
             })
-                .then(res => {
-                    const workSupprime = globalFigures.filter((work, index, arr) => {
+                //suppression dynamique dans la page d'accueil (affichage dynamique des figures grâce à globalFigures)
+                .then(function (res) {
+                    //filtre pour supprimer dynaquement dans la page d'accueil 
+                    const workSupprime = globalFigures.filter(function (work, index, tab) {
+                        //si id du tableau globalFigure == id ciblé lors du clique (sur le boutonParentLogoPoubelle) alors:
                         if (work.id == id) {
-                            arr.splice(index, 1);
+                            //suppression dans le tableau de la figure ciblé
+                            tab.splice(index, 1);
                             return true;
                         }
+                        //id n'existe plus dans le tableau
                         return false;
                     })
-                    console.log("Work supprimé ", workSupprime)
-                    console.log("Tous les nouveaux Work", globalFigures)
                 })
         }
-        gallerieModal.removeChild(elementParent.parentElement);
+        //suppression de la figure ciblé dans la modale (dynamiquement)
+        gallerieModal.removeChild(boutonParentLogoPoubelle.parentElement);
     }
 }
-function genererFigureModal(work) {
 
+const genererFigureModal = function (work) {
+
+    //création de figure et import de la gallerie modale
     const projetArchitecte = document.createElement("figure");
     const gallerieModal = document.querySelector(".gallery-modal");
 
-    //création des images et nom des projets
+    //création des images et nom des figures
     const imageProjet = document.createElement("img");
     imageProjet.crossOrigin = "anonymous";
     imageProjet.src = work.imageUrl;
@@ -56,7 +70,9 @@ function genererFigureModal(work) {
     const nomProjet = document.createElement("figcaption");
     nomProjet.innerText = "éditer";
 
+    //affichage de la poubelle sur les figures de la modale 
     const boutonPoubelle = creePoubelle();
+    //association de l'id de bouton poubelle à l'id de la figure
     boutonPoubelle.dataset.workId = work.id;
 
     // on rattache les projets de l'architecte à la gallerie
@@ -67,9 +83,9 @@ function genererFigureModal(work) {
     projetArchitecte.appendChild(nomProjet);
     projetArchitecte.appendChild(boutonPoubelle);
 
-    //supprimer des éléments de la gallerie
-    boutonPoubelle.addEventListener("click", supprimerCallback(work))
-    
+    //supprimer des éléments de la gallerie et gallerie modale
+    boutonPoubelle.addEventListener("click", callBackSupprimer(work))
+
 };
 
 //---------------------------------- FOCUSABLE -------------------------//
@@ -110,50 +126,73 @@ window.addEventListener("keydown", function (e) {
 
 
 export const openModal = function (e, figures) {
-    globalFigures = figures
-    figures.forEach((figure) => {
+    //inséré les figures dans le tableau globalFigures
+    globalFigures = figures;
+    //generer les figures
+    figures.forEach(function (figure) {
         genererFigureModal(figure);
     });
     e.preventDefault();
-    modal = document.querySelector(e.target.getAttribute("href")) // cible l'id modal1
-    const boutonClose = document.querySelector(".js-close-modal")
-    boutonClose.innerHTML = "x"
-    focusables = Array.from(modal.querySelectorAll(focusableSelector)) //Array.from pour avoir les éléments focusables dans un tableau
-    focusables[0].focus() //permet de selectionner le premier élément focusable avec tab
-    modal.style.display = null // enlève de display none attribué dans le HTML
-    modal.removeAttribute("aria-hidden")// on retire le masquage d'élément pour les lecteurs d'écran (accessibilité)
-    modal.setAttribute("aria-modal", "true")//permet d'indiquer aux technologies d'assistance que les fenetre situées sous la boite de dialogue ne font pas partie de la boite modal (accessibilité)
-    modal.addEventListener("click", closeModal)//permet de fermer la fenetre lors du click
-    modal.querySelector(".js-close-modal").addEventListener("click", closeModal)//permet de fermer la modal lors du clique sur le bouton
-    modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)//permet de stopper la propagation de fermeture lors du clique a l'interieur de la modale
+     // cible l'id modal1
+    modal = document.querySelector(e.target.getAttribute("href"));
+    //appel de la classe pour boutonClose et inner avec x
+    const boutonClose = document.querySelector(".js-close-modal");
+    boutonClose.innerHTML = "x";
+    //Array.from pour avoir les éléments focusables dans un tableau
+    focusables = Array.from(modal.querySelectorAll(focusableSelector));
+     //permet de selectionner le premier élément focusable avec tab
+    focusables[0].focus();
+    // enlève de display none attribué dans le HTML pour afficher la modale
+    modal.style.display = null;
+    // on retire le masquage d'élément pour les lecteurs d'écran (accessibilité)
+    modal.removeAttribute("aria-hidden");
+    //indique aux technologies d'assistance que les fenetre situées sous la boite de dialogue ne font pas partie de la boite modal (accessibilité)
+    modal.setAttribute("aria-modal", "true");
+    //ferme la fenetre lors du click
+    modal.addEventListener("click", closeModal);
+    //ferme la modal lors du clique sur le bouton
+    modal.querySelector(".js-close-modal").addEventListener("click", closeModal);
+    //stop la propagation de fermeture lors du clique a l'interieur de la modale
+    modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation);
 }
 
 /* --------------------- FERMETURE MODALE ---------------------------- */
 
 const closeModal = function (e) {
-    if (modal === null) return  //si la modale s'affiche
+    //si la modale s'affiche
+    if (modal === null) return
     e.preventDefault();
+    //supprimer les figures de la galerie modale
     document.querySelector(".gallery-modal").innerHTML = "";
-    modal.style.display = "none"; // ne plus afficher la modale
-    modal.setAttribute("aria-hidden", "true"); //on masque la modale pour les lecteurs d'écran (accessibilité)
-    modal.removeAttribute("aria-modal"); // on indique les fenetres sous la modale redevienne active (accessibilité)
-    modal.removeEventListener("click", closeModal); // on retire l'écoute du clique 
-    modal.querySelector(".js-close-modal").removeEventListener("click", closeModal); //on retire la fermeture de la modale
-    modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation); // on retire le stop de propagation pour la fermeture
-    modal = null; // on remet la valeur de la modal a null
+    // ne plus afficher la modale
+    modal.style.display = "none";
+    //on masque la modale pour les lecteurs d'écran (accessibilité)
+    modal.setAttribute("aria-hidden", "true"); 
+    // on indique les fenetres sous la modale redevienne active (accessibilité)
+    modal.removeAttribute("aria-modal"); 
+    // on retire l'écoute du clique 
+    modal.removeEventListener("click", closeModal); 
+    //on retire la fermeture de la modale
+    modal.querySelector(".js-close-modal").removeEventListener("click", closeModal); 
+    // on retire le stop de propagation pour la fermeture
+    modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation); 
+    // on remet la valeur de la modal a null (elle ne s'affiche plus)
+    modal = null; 
+    //appel de la fonction pour retour à la page d'accueil
     retourPageAccueilModale();
-    console.log("ici", globalFigures)
+    //appelle de la gallerie et suppression des figures sur la page d'accueil
     const gallerie = document.querySelector(".gallery");
-    gallerie.innerHTML = ""
-    globalFigures.forEach((figure) => {
-        genererFigure(figure); // pour chaque projet => generer projet
+    gallerie.innerHTML = "";
+    //regenerer les figures
+    globalFigures.forEach(function (figure) {
+        genererFigure(figure);
     });
 }
 
 /* -------------------------STOP PROPAGATION------------------------ */
 
 const stopPropagation = function (e) {
-    e.stopPropagation()
+    e.stopPropagation();
 }
 
 
@@ -172,28 +211,42 @@ const imgPreview = document.getElementById('img-preview');
 
 //fonction pour passer de la première à la deuxième page
 const ajouterDesProjets = function () {
+    //modifier le titre "Gallerie photo" en "Ajout photo"
     titreModal.innerText = "Ajout photo";
-
+    //supprime l'affichage de la gallerie
     gallerieModal.style.display = "none";
+    //affiche le formulaire qui permet l'ajout des figures
     ajoutProjet.style.display = "block";
+    //affichage du bouton retour
     boutonRetour.style.display = "block";
-    boutonAjouterProjet.style.display = "none";
+    //suprime l'affichage des boutons "Ajouter une photo" et "Supprimer la gallerie"
     ajouterSupprimerProjets.style.display = "none";
+    //affiche le bouton "valider"
     boutonValider.style.display = "block";
+    //activer le bouton envoyer
+    boutonEnvoyerForm()
 };
 
 
 /* ------ RETOURNER DE LA "DEUXIEME" PAGE MODALE A LA "PREMIERE" ------- */
 const retourPageAccueilModale = function () {
+    //modifie le titre "Ajout photo" en "Gallerie photo"
     titreModal.innerText = "Galerie photo";
+    //affiche la gallerie modale
     gallerieModal.style.display = "grid";
+    //supprime l'affichage du formulaire qui permet d'ajouter des figures
     ajoutProjet.style.display = "none";
+    //supprime l'affichage du bouton retour
     boutonRetour.style.display = "none";
+    //affiche les boutons "Ajouter une photo" et "Supprimer la gallerie"
     ajouterSupprimerProjets.style.display = "flex";
-    boutonAjouterProjet.style.display = "block";
+    //supprime l'affichage du bouton "valider"
     boutonValider.style.display = "none";
+    //supprime ce qui est écrit dans l'input titre
     titre.value = "";
-    reinitialiserAjouterPhoto()
+    //reinitialise l'ajout de photo 
+    reinitialiserAjouterPhoto();
+    boutonEnvoyerFormDesactive();
 };
 
 boutonAjouterProjet.addEventListener("click", ajouterDesProjets);
@@ -206,34 +259,42 @@ const textAjouterPhoto = document.getElementById("ajout-photo");
 const pngJpg = document.getElementById("legende-photo");
 const logoImage = document.getElementById("logo-image");
 
-photoSelector.addEventListener('change', event => {
-    /* const files = event.target.files  */
-    /*     const imgPreview = document.getElementById('img-preview'); */
+photoSelector.addEventListener('change', function (event) {
+    //suppression du texte " + Ajouter Photo"
     textAjouterPhoto.style.display = "none";
+    //suppression du texte "png, jpg : 4mo max"
     pngJpg.style.display = "none";
+    //suppression du logo
     logoImage.style.display = "none";
+    //affichage de la prévisualisation de l'image selectionnée
     imgPreview.style.display = "block";
+    //source de l'image sélectionnée
     imgPreview.src = URL.createObjectURL(event.target.files[0]);
+    //libère l'url de la source de l'image
     imgPreview.onload = function () {
-        URL.revokeObjectURL(imgPreview.src) // free memory
+        URL.revokeObjectURL(imgPreview.src);
     }
 })
 
 const reinitialiserAjouterPhoto = function () {
+    //affichage du texte " + Ajouter Photo"
     textAjouterPhoto.style.display = null;
+    //affichage du texte "png, jpg : 4mo max"
     pngJpg.style.display = null;
+    //affichage du logo
     logoImage.style.display = null;
+    //suppression de la prévisualisation de l'image selectionnée
     imgPreview.style.display = null;
-    imgPreview.src = ""
+    //suppression de la source de l'image
+    imgPreview.src = "";
 }
 
 
 /* ------------------ AJOUTER LE NOUVEAU PROJET -------------------------- */
 
 async function callApiAjouterFigure(workForm) {
-    console.log(workForm)
-    let token = window.sessionStorage.getItem("token")
-    console.log("tokenAjouterProjet", token)
+    console.log(workForm);
+    let token = window.sessionStorage.getItem("token");
     const response = await fetch('http://localhost:5678/api/works', {
         method: 'POST',
         headers: {
@@ -244,13 +305,12 @@ async function callApiAjouterFigure(workForm) {
     return response
 };
 
-
-//activation/desactivation bouton valider
+//activation bouton valider
 const boutonEnvoyerForm = function () {
 
     const photo = document.getElementById("file");
     const titre = document.getElementById("ajouter-titre");
-    const valider = document.getElementById("valider")
+    const valider = document.getElementById("valider");
 
     titre.addEventListener("change", function () {
         if (photo.value != "" && titre.value != "") {
@@ -267,7 +327,15 @@ const boutonEnvoyerForm = function () {
     })
 }
 
-boutonEnvoyerForm()
+//desactivation bouton valider
+
+const boutonEnvoyerFormDesactive = function () {
+    const valider = document.getElementById("valider");
+    valider.getAttribute("disabled");
+    valider.style.backgroundColor = null;
+}
+
+
 
 // envoi du formulaire avec method POST
 const ajouterProjet = function () {
@@ -293,7 +361,7 @@ const ajouterProjet = function () {
         imageProjet.crossOrigin = "anonymous";
         const nomProjet = document.createElement("figcaption");
         nomProjet.innerText = "editer";
-        
+
 
 
 
@@ -319,10 +387,10 @@ const ajouterProjet = function () {
                     const boutonPoubelle = creePoubelle();
                     boutonPoubelle.dataset.workId = body.id;
                     afficherNouveauProjet.appendChild(boutonPoubelle);
-                    
+
                     //supprimer des éléments de la gallerie
-                    boutonPoubelle.addEventListener("click", supprimerCallback(body))
-                    
+                    boutonPoubelle.addEventListener("click", callBackSupprimer(body))
+
                     retourPageAccueilModale();
                 })
             });

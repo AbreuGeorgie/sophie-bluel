@@ -1,3 +1,4 @@
+/* -------------- FONCTION APPEL A L'API / POST ----------*/
 
 async function callApilogin(user) {
   const response = await fetch('http://localhost:5678/api/users/login', {
@@ -10,38 +11,43 @@ async function callApilogin(user) {
   return response
 };
 
-//connexion utilisateur
-const formulaire = document.querySelector(".form-login"); //reccuperation du formulaire de connexion
+/* -------------- CONNEXION UTILISATEUR ------------------------- */
 
-//fonction evenement lors du clique connexion
+//reccuperation du formulaire de connexion
+const formulaire = document.querySelector(".form-login");
+
 formulaire.addEventListener("submit", function (event) {
-  /*   for (let input of document.querySelectorAll(".form input")) {
-      input.reportValidity();
-    } */
   event.preventDefault();
   //creation objet utilisateur email/password
   let user = {
-    email: (event.target.querySelector("#email").value), //cible email
-    password: (event.target.querySelector("#pass").value) // cible mot de passe
+    //cible email
+    email: (event.target.querySelector("#email").value),
+    // cible mot de passe
+    password: (event.target.querySelector("#pass").value)
   };
 
   //appel à l'api
   callApilogin(user)
-    .then((res) => {
+    .then(function (res) {
       console.log(res)
-      if (!res.ok) { //si la connexion ne se fait pas
+
+      //si la connexion ne se fait pas
+      if (!res.ok) {
         window.sessionStorage.removeItem("token");
-        res.json().then((body) => {
-          throw body.message
-        }).catch((error) => {
-          console.log(error);
-          alert(error);
-        });
+        res.json().then(function (body) {
+          throw document.getElementById('message-erreur').innerHTML = "E-mail ou mot de passe invalide";
+        })
+
+        //si connection ok
       } else {
-        document.location.href = "./index.html"; //retour à la page d'accueil si connexion ok 
-        const token = res.json().then((body) => { //reccuperation du token
-          console.log("token", body.token);
-          let tokenUser = window.sessionStorage.setItem("token", body.token); //enregistrer le token dans le sessionstorage
+        //n'affiche pas de message d'erreur
+        document.getElementById('message-erreur').innerHTML = "";
+        //retour à la page d'accueil 
+        document.location.href = "./index.html";
+        //reccuperation du token
+        const token = res.json().then(function (body) {
+          //enregistrer le token dans le sessionstorage
+          let tokenUser = window.sessionStorage.setItem("token", body.token);
         });
       }
     })

@@ -4,7 +4,8 @@ import { genererFiltres } from "./filtres.js";
 import { openModal } from "./modal.js";
 import { logout } from "./logout.js";
 
-//Affichage des éléments une fois la page chargée
+/* -------------AFFICHAGE DES ELEMENTS UNE FOIS LA PAGE CHARGEE ----------------- */
+
 window.addEventListener('DOMContentLoaded', function (event) {
     let token = window.sessionStorage.getItem("token")
     
@@ -21,25 +22,24 @@ window.addEventListener('DOMContentLoaded', function (event) {
         document.getElementById("modifier-photo").style.display = "block";
     };
 
+    //appel a l'api
     callApiWorks().then(function (figures) {
         figures.forEach(function (figure) {
-            // pour chaque projet => generer projet
+            // pour chaque projet generer projet
             genererFigure(figure);
         });
         // generer les filtres
         genererFiltres();  
     });
 
-    //deconnection
+    //deconnexion
     logout();
 
-    //fonction qui va appeler a l'ouverture de la modale lors du clique sur le bouton modifier
-    document.querySelector(".js-modal").addEventListener("click", (e) => {
-        callApiWorks().then((figures) => {
+    //fonction ouverture de la modale lors du click sur le bouton modifier
+    document.querySelector(".js-modal").addEventListener("click", function (e) {
+        callApiWorks().then(function (figures) {
             openModal(e, figures)
-            console.log("az", e, "aa", figures)
         });
     });
-
 });
 

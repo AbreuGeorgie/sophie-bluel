@@ -29,17 +29,19 @@ Lancer le fichier index.html avec Live Server.
     - JAVASCRIPT
 
 - Fichiers HTML:
+
     Le projet contient 2 fichiers HTML.
-    Le fichier index.html qui contient le code HTML de la page d'accueil du site et le fichier login.html où j'y ai mis le code HTML de la page de connection.
+    Le fichier index.html qui contient le code HTML de la page d'accueil du site et le fichier login.html où j'y ai mis le code HTML de la page de connexion.
 
 - Fichier CSS:
-    Il y a 1 fichier CSS style.css qui contient tout le CSS du projet
+
+    Il y a 1 fichier CSS style.css qui contient tout le CSS du projet.
 
 - Fichiers JAVASCRIPT:
 
-    Il y a 5 fichiers Javascript:
+    Il y a 6 fichiers Javascript:
 
-    - 1 fichier principal main.js appelé directement par le fichier index.html, dans lequel j'y ai importé les fonctions qui concerne la page d'accueil 
+    - 1 fichier principal main.js appelé directement par le fichier index.html, dans lequel j'y ai importé les fonctions qui concerne la page d'accueil.
 
     -   Le fichier work.js qui contient l'appel à l'api pour récupérer les works du backend et la fonction pour les générer sur la page, ses fonctions sont appelées dans tous les fichiers ratachés à la page d'accueil (tous sauf login.js).
 
@@ -48,6 +50,8 @@ Lancer le fichier index.html avec Live Server.
     - Le fichier modale.js qui contient les fonctions qui concerne la modale.
 
     - Le fichier login.js est indépendant des autres et est appelé par le fichier login.html.
+
+    - Le fichier logout.js qui contient la fonction de deconnexion appelée par le main.js.
 
 ## Sources
 
@@ -62,11 +66,7 @@ Pour ce projet, je me suis aidée :
 
 ## Tests fonctionnels
 
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
-- [ ]
+- [ ] connexion avec le mauvais identifiant ou mot de passe
+- [ ] connexion avec le bon identifiant et mot de passe
+- [ ] ajouter un projet
+- [ ] supprimer un projet 

@@ -25,7 +25,7 @@
 </header>
 <main class="main-login">
 	<h2>Log In</h2>
-	<form submit="./index.html" class="form-login">
+	<form name="formulaire-connexion" submit="./index.html" class="form-login">
 		<div class="log">
 			<label for="email">E-mail</label>
 			<input type="text" id="email" name="email" required>
@@ -34,6 +34,7 @@
 			<label for="pass">Mot de passe</label>
 			<input type="password" id="pass" name="password" required>
 		</div>
+		<span class="erreur" id="message-erreur"></span>
 		<input type="submit" id="connecter" value="Se Connecter">
 		<div id="oublie"><a href="#">Mot de passe oublié</a></div>
 	</form>

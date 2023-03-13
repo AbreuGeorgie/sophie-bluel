@@ -66,7 +66,11 @@ Pour ce projet, je me suis aidée :
 
 ## Tests fonctionnels
 
-- [x] connexion avec le mauvais identifiant ou mot de passe
-- [x] connexion avec le bon identifiant et mot de passe
-- [x] ajouter un projet
-- [x] supprimer un projet 
+- [x] connexion avec le mauvais identifiant ou mot de passe pour voir le message d'erreur
+- [x] connexion avec le bon identifiant et mot de passe pour voir si la connexion se passe bien
+- [x] cliquer sur les filtres pour voir le bon affichage des projets
+- [x] cliquer sur modifier pour ouvrir la modale
+- [x] ajouter un projet et voir si l'ajout se fait bien sur la modale et dans la page d'accueil
+- [x] supprimer un projet et voir si la suppression se fait bien sur la modale et dans la page d'accueil
+- [x] se deconnecter pour voir si cela fonctionne
+

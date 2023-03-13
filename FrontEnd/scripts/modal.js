@@ -4,6 +4,42 @@ let modal = null;
 //création d'un tableau pour y mettre les figures
 let globalFigures = [];
 
+//---------------------------------- FOCUSABLE -------------------------//
+
+//variable qui permet d'identifier les différents éléments focusables 
+const focusableSelector = "button, a, input, textarea";
+let focusables = []
+
+//fonction qui va permettre de selectionner les elements focusable
+const focusInModal = function (e) {
+    e.preventDefault()
+    let index = focusables.findIndex(f => f === modal.querySelector(":focus"))
+    if (e.shiftKey === true) {
+        index--
+    } else {
+        index++
+    }
+    if (index >= focusables.length) {
+        index = 0
+    }
+    if (index < 0) {
+        index = focusables.length - 1
+    }
+    focusables[index].focus();
+}
+
+//fonction qui écoute les cliques du clavier et permet de fermer la modal ou selectionner un element focusable avec tab
+window.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" || e.key === "Esc") {
+        closeModal(e)
+    }
+    if (e.key === "Tab" && modal !== null) {
+        focusInModal(e);
+    }
+})
+
+//---------------------------------------------------------------------------------//
+
 const creePoubelle = function () {
     //création du logo poubelle dans le boutton
     const boutonPoubelle = document.createElement("button");
@@ -16,12 +52,20 @@ const creePoubelle = function () {
     return boutonPoubelle;
 }
 
+const creeBoutonDeplacer = function (){
+    //création du bouton déplacer
+    const boutonDeplacer = document.createElement("button");
+    const logoDeplacer = document.createElement("i");
+    boutonDeplacer.className = "bouton-deplacer";
+    logoDeplacer.className = "fa-solid fa-arrows-up-down-left-right";
+    boutonDeplacer.appendChild(logoDeplacer);
+    return boutonDeplacer;
+}
+
 const callBackSupprimer = function (work) {
     return function (e) {
         //sélection de l'élément parent du bouton poubelle
         const boutonParentLogoPoubelle = e.target.parentElement;
-        console.log("bouton.dataset", boutonParentLogoPoubelle.dataset)
-        console.log("bouton", boutonParentLogoPoubelle)
         //si workId dans le boutonParentLogoPoubelle existe :
         if ("workId" in boutonParentLogoPoubelle.dataset === true) {
             //id = workId du boutonParentLogoPoubelle
@@ -72,6 +116,10 @@ const genererFigureModal = function (work) {
 
     //affichage de la poubelle sur les figures de la modale 
     const boutonPoubelle = creePoubelle();
+
+    //affichage du bouton déplacer sur les figures
+    const boutonDeplacerProjet = creeBoutonDeplacer();
+
     //association de l'id de bouton poubelle à l'id de la figure
     boutonPoubelle.dataset.workId = work.id;
 
@@ -82,45 +130,19 @@ const genererFigureModal = function (work) {
     projetArchitecte.appendChild(imageProjet);
     projetArchitecte.appendChild(nomProjet);
     projetArchitecte.appendChild(boutonPoubelle);
+    projetArchitecte.appendChild(boutonDeplacerProjet);
 
     //supprimer des éléments de la gallerie et gallerie modale
     boutonPoubelle.addEventListener("click", callBackSupprimer(work))
-
+    projetArchitecte.addEventListener("mouseover", function (event) {
+        // on affiche le logo fleche deplacer
+        boutonDeplacerProjet.style.display = "block";
+    })
+    projetArchitecte.addEventListener("mouseout", function (event) {
+        // on enleve l'affichage le logo fleche deplacer
+        boutonDeplacerProjet.style.display = "none";
+    })
 };
-
-//---------------------------------- FOCUSABLE -------------------------//
-
-//variable qui permet d'identifier les différents éléments focusables 
-const focusableSelector = "button, a, input, textarea";
-let focusables = []
-
-//fonction qui va permettre de selectionner les elements focusable
-const focusInModal = function (e) {
-    e.preventDefault()
-    let index = focusables.findIndex(f => f === modal.querySelector(":focus"))
-    if (e.shiftKey === true) {
-        index--
-    } else {
-        index++
-    }
-    if (index >= focusables.length) {
-        index = 0
-    }
-    if (index < 0) {
-        index = focusables.length - 1
-    }
-    focusables[index].focus();
-}
-
-//fonction qui écoute les cliques du clavier et permet de fermer la modal ou selectionner un element focusable avec tab
-window.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" || e.key === "Esc") {
-        closeModal(e)
-    }
-    if (e.key === "Tab" && modal !== null) {
-        focusInModal(e);
-    }
-})
 
 //--------------------- OUVERTURE MODALE ----------------------------//
 
@@ -362,9 +384,6 @@ const ajouterProjet = function () {
         const nomProjet = document.createElement("figcaption");
         nomProjet.innerText = "editer";
 
-
-
-
         // appel à l'api
         callApiAjouterFigure(workForm)
             .then((res) => {
@@ -385,7 +404,9 @@ const ajouterProjet = function () {
                     afficherNouveauProjet.appendChild(nomProjet)
                     gallerieModal.appendChild(afficherNouveauProjet);
                     const boutonPoubelle = creePoubelle();
+                    
                     boutonPoubelle.dataset.workId = body.id;
+                    
                     afficherNouveauProjet.appendChild(boutonPoubelle);
 
                     //supprimer des éléments de la gallerie

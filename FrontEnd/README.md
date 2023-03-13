@@ -66,7 +66,7 @@ Pour ce projet, je me suis aidée :
 
 ## Tests fonctionnels
 
-- [ ] connexion avec le mauvais identifiant ou mot de passe
-- [ ] connexion avec le bon identifiant et mot de passe
-- [ ] ajouter un projet
-- [ ] supprimer un projet 
+- [x] connexion avec le mauvais identifiant ou mot de passe
+- [x] connexion avec le bon identifiant et mot de passe
+- [x] ajouter un projet
+- [x] supprimer un projet 

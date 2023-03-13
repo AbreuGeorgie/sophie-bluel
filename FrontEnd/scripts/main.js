@@ -8,7 +8,7 @@ import { logout } from "./logout.js";
 
 window.addEventListener('DOMContentLoaded', function (event) {
     let token = window.sessionStorage.getItem("token")
-    
+
     // si connecté alors:
     if (token !== null) {
         //modification du bouton login en logout
@@ -29,7 +29,7 @@ window.addEventListener('DOMContentLoaded', function (event) {
             genererFigure(figure);
         });
         // generer les filtres
-        genererFiltres();  
+        genererFiltres();
     });
 
     //deconnexion

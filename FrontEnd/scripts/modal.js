@@ -315,7 +315,6 @@ const reinitialiserAjouterPhoto = function () {
 /* ------------------ AJOUTER LE NOUVEAU PROJET -------------------------- */
 
 async function callApiAjouterFigure(workForm) {
-    console.log(workForm);
     let token = window.sessionStorage.getItem("token");
     const response = await fetch('http://localhost:5678/api/works', {
         method: 'POST',
@@ -396,7 +395,6 @@ const ajouterProjet = function () {
                     });
                 }
                 res.json().then((body) => {
-                    console.log(body)
                     globalFigures.push(body)
                     imageProjet.src = body.imageUrl
                     imageProjet.alt = title;

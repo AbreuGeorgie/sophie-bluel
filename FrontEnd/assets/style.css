@@ -203,6 +203,9 @@ nav a {
 nav>ul>li>a:hover {
 	color: #B1663C;
 }
+button:hover{
+	cursor: pointer;
+}
 
 nav a:visited {
 	color: black;
@@ -471,6 +474,10 @@ footer nav ul {
 	width: 70%;
 }
 
+.gallery-modal figure{
+	height: 120px;
+}
+
 .gallery-modal img {
 	width: 77.37px;
 	height: 108.36px
@@ -554,6 +561,10 @@ footer nav ul {
 	overflow: hidden;
 }
 
+#ajout-photo:hover, #choisir-categorie:hover, #valider:hover, #ajouter-projets:hover {
+	cursor: pointer;
+}
+
 #parent-div input[type=file] {
 	left: 0;
 	top: 0;
@@ -627,6 +638,18 @@ h4 {
 	background: black;
 	border: none;
 	border-radius: 3px;
+}
+
+.bouton-deplacer {
+	padding: 3px 3px;
+	position: relative;
+	bottom: 138px;
+    left: 30px;
+	background: black;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	display: none;
 }
 
 #img-preview{

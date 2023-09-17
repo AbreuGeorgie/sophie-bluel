@@ -90,10 +90,10 @@ Pour ce projet, je me suis aidée :
 * des cours sur Javascript d'OpenClassRoom
 * du webinaire "Utilisez JavaScript pour réaliser un site dynamique" d'OpenClassRoom
 * du guide des étapes clés
-* du tutoriel "Documenter son API avec OpenAPI (Swagger)" de Grafikart
-* du tutoriel "Fenêtre modale" de Grafikart également
-* du site https://developer.mozilla.org notamment les pages pages qui concernent fetch, createElement, l'objet Set, l'objet formData
-* du site https://fr.javascript.info, à la page qui explique comment utiliser la requête POST avec fetch
+* du tutoriel ["Documenter son API avec OpenAPI (Swagger)"](https://grafikart.fr/tutoriels/swagger-openapi-php-1160) de Grafikart
+* du tutoriel ["Fenêtre modale"](https://grafikart.fr/tutoriels/modal-javascript-css-72) de Grafikart également
+* du site https://developer.mozilla.org notamment les pages pages qui concernent [fetch](https://developer.mozilla.org/fr/docs/Web/API/Fetch_API), [createElement](https://developer.mozilla.org/fr/docs/Web/API/Document/createElement), [l'objet Set](https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Global_Objects/Set), [l'objet formData](https://developer.mozilla.org/fr/docs/Web/API/FormData)
+* du site https://fr.javascript.info, à la [page](https://javascript.info/fetch) qui explique comment utiliser la requête POST avec fetch
 
 ## Tests fonctionnels
 

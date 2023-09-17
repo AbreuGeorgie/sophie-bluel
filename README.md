@@ -1,12 +1,49 @@
-# CREER UNE PAGE WEB DYNAMIQUE AVEC JAVASCRIPT 
+![Banner](/FrontEnd/assets/images/readme/sophie-bluel.webp)
 
-## Introduction
+## Technologies
 
-Ce repo contient le code frontend du site de l'architecte Sophie Bluel. 
+- HTML
+- CSS
+- Javascript
+
+## Description
+
+[Projet 3](https://openclassrooms.com/fr/paths/717/projects/1157/assignment) réalisé dans le cadre du programme de formation Développeur Web chez OpenClassrooms.
+
+> Créer une page web dynamique avec JavaScript
+
+### Contexte
+
+Je suis développeuse front-end pour l’agence ArchiWebos qui comprend 50 salariés. 
+
+Ayant terminé mon dernier projet avec un peu d'avance, je suis envoyée en renfort d’une équipe qui travaille sur la conception du site portfolio d’une architecte d’intérieur.
+
+Je dois donc développer :
+- la page de présentation des travaux de l'architecte (à partir du HTML fourni) ;
+- la page de connexion de l'administrateur du site (le client) (code à créer de zéro) ;
+- la modale permettant d'uploader de nouveaux médias (code à créer from scratch).
+
+> ### Compétences évaluées :
+>
+> - Manipuler les éléments du DOM avec JavaScript
+> - Récupérer les données utilisateurs dans le JavaScript via des formulaires
+> - Gérer les événements utilisateurs avec JavaScript
+
+## Lancement du backend
+
+Après avoir récupéré le REPO executez la commande `npm install` pour installer les dépendances du projet
+
+Une fois les dépendances installées lancez le projet avec la commande `npm start`
+
+Compte de test pour Sophie Bluel
+
+```
+email: sophie.bluel@test.tld
+
+password: S0phie 
+```
 
 ## Lancement du frontend
-
-Après avoir récupéré le REPO, suivre le README du backend.
 
 Telecharger l'extension Live Server sur Visual Studio Code.
 
@@ -21,12 +58,6 @@ Le dossier caché .vscode contient la configuration du projet pour live server, 
 Lancer le fichier index.html avec Live Server.
 
 ## Détail des fichiers
-
-- Les différents langages utilisés :
-
-    - HTML5
-    - CSS3
-    - JAVASCRIPT
 
 - Fichiers HTML:
 
@@ -73,4 +104,8 @@ Pour ce projet, je me suis aidée :
 - [x] ajouter un projet et voir si l'ajout se fait bien sur la modale et dans la page d'accueil
 - [x] supprimer un projet et voir si la suppression se fait bien sur la modale et dans la page d'accueil
 - [x] se deconnecter pour voir si cela fonctionne
+
+## Auteur :
+
+**Georgie Abreu** : [**GitHub**](https://github.com/AbreuGeorgie/)
 

@@ -29,6 +29,8 @@ Je dois donc développer :
 > - Récupérer les données utilisateurs dans le JavaScript via des formulaires
 > - Gérer les événements utilisateurs avec JavaScript
 
+[Lien vers les maquettes](https://www.figma.com/file/69gAtj0eH9MixlXnI8sArw/OUTDATED-Sophie-Bluel---Desktop?type=design&node-id=0-1&mode=design)
+
 ## Lancement du backend
 
 Après avoir récupéré le REPO executez la commande `npm install` pour installer les dépendances du projet
@@ -104,6 +106,17 @@ Pour ce projet, je me suis aidée :
 - [x] ajouter un projet et voir si l'ajout se fait bien sur la modale et dans la page d'accueil
 - [x] supprimer un projet et voir si la suppression se fait bien sur la modale et dans la page d'accueil
 - [x] se deconnecter pour voir si cela fonctionne
+
+## Aperçu du site web :
+
+> - Page d'accueil : 
+![Homepage](https://www.canva.com/design/DAFux4ZmowY/-zTpyFeG9frdSIjkI4n-2A/view?utm_content=DAFux4ZmowY&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel)
+
+> - Page de connexion : 
+![LoginPage](/FrontEnd/assets/images/readme/sophie-bluel.webp)
+
+> - Modale pour ajouter/supprimer une photo : 
+![Modale](/FrontEnd/assets/images/readme/sophie-bluel.webp)
 
 ## Auteur :
 

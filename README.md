@@ -110,13 +110,14 @@ Pour ce projet, je me suis aidée :
 ## Aperçu du site web :
 
 > - Page d'accueil : 
-![Homepage](https://www.canva.com/design/DAFux4ZmowY/-zTpyFeG9frdSIjkI4n-2A/view?utm_content=DAFux4ZmowY&utm_campaign=share_your_design&utm_medium=link&utm_source=shareyourdesignpanel)
+![Homepage](/FrontEnd/assets/images/readme/home-page.webp)
 
 > - Page de connexion : 
-![LoginPage](/FrontEnd/assets/images/readme/sophie-bluel.webp)
+![LoginPage](/FrontEnd/assets/images/readme/login-page.webp)
 
 > - Modale pour ajouter/supprimer une photo : 
-![Modale](/FrontEnd/assets/images/readme/sophie-bluel.webp)
+![Modale](/FrontEnd/assets/images/readme/modal.webp)
+![Modale-add](/FrontEnd/assets/images/readme/modal-add.webp)
 
 ## Auteur :
 
